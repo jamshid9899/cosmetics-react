@@ -5,7 +5,7 @@ export function HomeNavbar() {
   const authMember = null;
   return (
     <div className="home-navbar">
-      <Container className=".navbar-container">
+      <Container className="navbar-container">
         <Stack className="menu">
           <Box>
             <NavLink to="/">
@@ -51,7 +51,7 @@ export function HomeNavbar() {
 
             {!authMember ? (
               <Box>
-                <Button className=".login-button" variant="contained">
+                <Button className=" login-button" variant="contained">
                   Login
                 </Button>
               </Box>
@@ -64,6 +64,25 @@ export function HomeNavbar() {
               />
             )}
           </Stack>
+        </Stack>
+        <Stack className={"header-frame"}>
+          <Stack className={"detail"}>
+            <Box className={"head-main-txt"}>
+              World's Most Delicious Cousine
+            </Box>
+            <Box className={"wel-txt"}>The Choice, not just a choice</Box>
+            <Box className={"service-txt"}>24 hours service</Box>
+            <Box className={"signup"}>
+              {!authMember ? (
+                <Button className={"signup-button"} variant="contained">
+                  Sign up
+                </Button>
+              ) : null}
+            </Box>
+          </Stack>
+          <Box className={"logo-frame"}>
+            <div className={"logo-image"}></div>
+          </Box>
         </Stack>
       </Container>
     </div>
