@@ -10,6 +10,7 @@ import theme from "./app/MaterialTheme";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./css/index.css";
 import "./css/navbar.css";
+import "./css/footer.css";
 
 const container = document.getElementById("root") as HTMLElement;
 const root = createRoot(container);
