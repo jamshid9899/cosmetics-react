@@ -13,12 +13,11 @@ import HelpPage from "./screens/helpPage";
 // import Typography from "./MaterialTheme/typography";
 
 function App() {
-  const location = useLocation();
+  const location = useLocation(); //hook
   console.log("location:", location);
   return (
     <>
       {location.pathname === "/" ? <HomeNavbar /> : <OtherNavbar />}
-
       <Switch>
         <Route path="/products">
           <ProductsPage />
