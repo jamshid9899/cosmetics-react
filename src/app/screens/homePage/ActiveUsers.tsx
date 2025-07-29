@@ -54,7 +54,7 @@ export default function ActiveUsers() {
                   );
                 })
               ) : (
-                <Box className={"no-data"}>Active users are not available</Box>
+                <Box className={"no-data"}>No active users</Box>
               )}
             </CssVarsProvider>
           </Stack>
