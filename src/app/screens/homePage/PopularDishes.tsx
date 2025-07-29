@@ -10,9 +10,9 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import DescriptionOutlinedicon from "@mui/icons-material/DescriptionOutlined";
 
 const list = [
-  { productName: "lavash", imagePath: "/img/lavash.webp" },
+  { productName: "Lavash", imagePath: "/img/lavash.webp" },
   { productName: "Cutlet", imagePath: "/img/cutlet.webp" },
-  { productName: "kebab", imagePath: "/img/kebab.webp" },
+  { productName: "Kebab", imagePath: "/img/kebab.webp" },
   { productName: "Kebab", imagePath: "/img/kebab-fresh.webp" },
 ];
 
