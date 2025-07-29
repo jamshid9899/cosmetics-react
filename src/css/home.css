@@ -243,3 +243,45 @@
   box-shadow: 0px -8px 90px rgb(125 215 255);
   overflow: hidden;
 }
+
+.homepage .ads-restaurant-frame .ads-video-src {
+  width: 100%;
+}
+
+/* ACTIVE USERS */
+
+.homepage .active-users-frame {
+  width: 100%;
+  height: 550px;
+  background-color: #f8f8ff;
+  display: flex;
+}
+
+.homepage .active-users-frame .main {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 70px;
+}
+
+.homepage .active-users-frame .main .category-title {
+  font-family: "Dancing Script";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 43px;
+}
+
+.homepage .active-users-frame .main .cards-frame {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.homepage .active-users-frame .cards-frame .card {
+  width: 305px;
+  height: 302px;
+  border-radius: 12px;
+}
