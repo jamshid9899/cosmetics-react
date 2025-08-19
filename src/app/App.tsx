@@ -9,6 +9,7 @@ import HomeNavbar from "./components/headers/HomeNavbar";
 import OtherNavbar from "./components/headers/OtherNavbar";
 import Footer from "./components/footer/index";
 import HelpPage from "./screens/helpPage";
+import Test from "./screens/Test";
 // import Typography from "./MaterialTheme/typography";
 
 function App() {
@@ -31,7 +32,8 @@ function App() {
           <HelpPage />
         </Route>
         <Route path="/">
-          <HomePage />
+          {/* <HomePage /> */}
+          <Test />
         </Route>
       </Switch>
       <Footer />
