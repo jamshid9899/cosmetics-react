@@ -8,7 +8,7 @@ import Events from "./Events";
 import "../../../css/home.css";
 
 import { useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "@reduxjs/toolkit";
+import { Dispatch } from "@reduxjs/toolkit"; //dispatch = the magic Redux function that sends your action to reducers.
 import { createSelector } from "reselect";
 import { setPopularDishes } from "./slice";
 import { retrievePopularDishes } from "./selector";
@@ -24,8 +24,8 @@ const popularDishesRetriever = createSelector(
 );
 
 export default function HomePage() {
-  const { setPopularDishes } = actionDispatch(useDispatch());
-  const { popularDishes } = useSelector(popularDishesRetriever);
+  // const { setPopularDishes } = actionDispatch(useDispatch());
+  // const { popularDishes } = useSelector(popularDishesRetriever);
 
   useEffect(() => {}, []);
 

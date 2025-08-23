@@ -9,7 +9,7 @@ const initialState: HomePageState = {
 
 const homePageSlice = createSlice({
   name: "homePage", // reduxda state.homePage nomi bn saqlanadi
-  initialState, // boshlangich nuqtasi
+  initialState, // boshlangich nuqtasi ya'ni state boshida bo'sh array korinishida boladi (tepadagi misol)
   reducers: {
     setPopularDishes: (state, action) => {
       state.popularDishes = action.payload; //takes the current state and replaces popularDishes (value) with whatever is in action.payload
