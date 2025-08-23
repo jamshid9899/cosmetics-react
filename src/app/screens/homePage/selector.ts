@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 import { AppRootState } from "../../../lib/types/screen";
 
-const selectHomePage = (state: AppRootState) => state.homepage; //homePage ga dahldor bo'lgan storage ni qolga kiritmoqdamiz
+const selectHomePage = (state: AppRootState) => state.homePage; //homePage ga dahldor bo'lgan storage ni qolga kiritmoqdamiz
 
 export const retrievePopularDishes = createSelector(
   selectHomePage, //homePage slice ichiga qaramoqdamiz

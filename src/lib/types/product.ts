@@ -6,7 +6,7 @@ import {
 } from "../enums/product.enums";
 
 export interface Product {
-  id: string;
+  _id: string;
   productStatus: ProductStatus;
   productCollection: ProductCollection;
   productName: string;
