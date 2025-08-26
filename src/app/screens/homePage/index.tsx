@@ -13,6 +13,7 @@ import ProductService from "../../services/ProductService";
 import { ProductCollection } from "../../../lib/enums/product.enums";
 import "../../../css/home.css";
 import { Member } from "../../../lib/types/member";
+import MemberService from "../../services/MemberService";
 
 /** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -53,6 +54,13 @@ export default function HomePage() {
       .then((data) => {
         setNewDishes(data);
       })
+      .catch((err) => console.log(err));
+
+    const memberService = new MemberService();
+
+    memberService
+      .getTopUsers()
+      .then((data) => setTopUsers(data))
       .catch((err) => console.log(err));
   }, []);
 
