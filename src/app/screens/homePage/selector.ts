@@ -5,7 +5,9 @@ const selectHomePage = (state: AppRootState) => state.homePage; //homePage ga da
 
 export const retrievePopularDishes = createSelector(
   selectHomePage, //homePage slice ichiga qaramoqdamiz
-  (HomePage) => HomePage.popularDishes // va undan popularDishes ni return qilmoqdamiz
+  (HomePage) => {
+    return HomePage.popularDishes;
+  } // va undan popularDishes ni return qilmoqdamiz
 );
 
 export const retrieveNewDishes = createSelector(

@@ -5,22 +5,27 @@ import NewDishes from "./NewDishes";
 import Advertisement from "./Advertisement";
 import ActiveUsers from "./ActiveUsers";
 import Events from "./Events";
-import "../../../css/home.css";
-
 import { useDispatch } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit"; //dispatch = the magic Redux function that sends your action to reducers.
-import { setPopularDishes } from "./slice";
+import { setNewDishes, setPopularDishes, setTopUsers } from "./slice";
 import { Product } from "../../../lib/types/product";
 import ProductService from "../../services/ProductService";
 import { ProductCollection } from "../../../lib/enums/product.enums";
+import "../../../css/home.css";
+import { Member } from "../../../lib/types/member";
 
 /** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({
+  //obyekt return bolyapti
   setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
+  setNewDishes: (data: Product[]) => dispatch(setNewDishes(data)),
+  setTopUsers: (data: Member[]) => dispatch(setTopUsers(data)),
 });
 
 export default function HomePage() {
-  const { setPopularDishes } = actionDispatch(useDispatch());
+  const { setPopularDishes, setNewDishes, setTopUsers } = actionDispatch(
+    useDispatch()
+  );
 
   useEffect(() => {
     //Backend server data fetch => Data
@@ -35,6 +40,18 @@ export default function HomePage() {
       .then((data) => {
         console.log("data passed here:", data);
         setPopularDishes(data); //puts it into Redux store (payload)
+      })
+      .catch((err) => console.log(err));
+
+    product
+      .getProducts({
+        page: 1,
+        limit: 4,
+        order: "createdAt",
+        productCollection: ProductCollection.DISH,
+      })
+      .then((data) => {
+        setNewDishes(data);
       })
       .catch((err) => console.log(err));
   }, []);
