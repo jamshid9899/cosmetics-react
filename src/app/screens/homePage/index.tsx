@@ -15,7 +15,7 @@ import "../../../css/home.css";
 import { Member } from "../../../lib/types/member";
 import MemberService from "../../services/MemberService";
 
-/** REDUX SLICE & SELECTOR **/
+/** REDUX SLICE **/
 const actionDispatch = (dispatch: Dispatch) => ({
   //obyekt return bolyapti
   setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
