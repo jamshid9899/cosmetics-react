@@ -24,6 +24,7 @@ import ProductService from "../../services/ProductService";
 import { ProductCollection } from "../../../lib/enums/product.enums";
 import { serverApi } from "../../../lib/config";
 import { useHistory } from "react-router-dom";
+import { CartItem } from "../../../lib/types/search";
 
 /** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -34,6 +35,10 @@ const productsRetriever = createSelector(retrieveProducts, (products) => ({
   products,
 }));
 
+interface ProductProps {
+  onAdd: (item: CartItem) => void;
+}
+
 const familyBrands = [
   { brandName: "Gurme", imagePath: "/img/gurme.webp" },
   { brandName: "Seafood", imagePath: "/img/seafood.webp" },
@@ -41,9 +46,10 @@ const familyBrands = [
   { brandName: "Doner", imagePath: "/img/doner.webp" },
 ];
 
-export default function Products() {
+export default function Products(props: ProductProps) {
+  const { onAdd } = props;
   const { setProducts } = actionDispatch(useDispatch());
-  const { products } = useSelector(productsRetriever);
+  const { products } = useSelector(productsRetriever); //use selector butun bunkerdi qolga olib beradi
   const [productSearch, setProductSearch] = useState<ProductInquiry>({
     page: 1,
     limit: 8,
@@ -275,7 +281,20 @@ export default function Products() {
                         sx={{ backgroundImage: `url(${imagePath})` }}
                       >
                         <div className={"product-sale"}>{sizeVolume}</div>
-                        <Button className={"shop-btn product-actions"}>
+                        <Button
+                          className={"shop-btn product-actions"}
+                          onClick={(e) => {
+                            console.log("BUTTON PRESSED");
+                            onAdd({
+                              _id: product._id,
+                              quantity: 1,
+                              name: product.productName,
+                              price: product.productPrice,
+                              image: product.productImages[0],
+                            });
+                            e.stopPropagation();
+                          }}
+                        >
                           <img
                             src={"/icons/shopping-cart.svg"}
                             alt=""

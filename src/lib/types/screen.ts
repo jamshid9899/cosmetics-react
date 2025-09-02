@@ -20,4 +20,5 @@ export interface ProductsPageState {
   chosenProduct: Product | null;
   products: Product[];
 }
+
 /** ORDERS PAGE **/
