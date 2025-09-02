@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import { Messages } from "./config";
 
 export const sweetErrorHandling = async (err: any) => {
-  const error = err.response?.data ?? err;
+  const error = err.response?.data ?? err; // ?? dan oldin chap tarafda null yoki undefined bolmasa shu tarafni qaytaradi aks holda ong tomonni (err)ni
   const message = error?.message ?? Messages.error1;
   await Swal.fire({
     icon: "error",
