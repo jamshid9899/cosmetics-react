@@ -20,14 +20,11 @@ interface BasketProps {
 
 export default function Basket(props: BasketProps) {
   const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = props;
-  const authMember = null;
   const history = useHistory();
-
-  const itemsPrice = cartItems.reduce(
+  const itemsPrice: number = cartItems.reduce(
     (a: number, c: CartItem) => a + c.quantity * c.price,
     0
   );
-
   const shippingCost: number = itemsPrice < 100 ? 5 : 0;
   const totalPrice = (itemsPrice + shippingCost).toFixed(1);
 
@@ -100,7 +97,7 @@ export default function Basket(props: BasketProps) {
                 <div>Cart Products:</div>
                 <DeleteForeverIcon
                   sx={{ ml: "5px", cursor: "pointer" }}
-                  color={"primary"}
+                  color="primary"
                   onClick={() => onDeleteAll()}
                 />
               </Stack>
@@ -149,7 +146,7 @@ export default function Basket(props: BasketProps) {
           {cartItems.length !== 0 ? (
             <Box className={"basket-order"}>
               <span className={"price"}>
-                Total: {totalPrice} ({itemsPrice} +{shippingCost})
+                Total: ${totalPrice} ({itemsPrice} + {shippingCost})
               </span>
               <Button startIcon={<ShoppingCartIcon />} variant={"contained"}>
                 Order
