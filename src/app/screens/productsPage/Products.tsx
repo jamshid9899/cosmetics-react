@@ -9,7 +9,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";

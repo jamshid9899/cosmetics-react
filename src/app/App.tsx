@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../css/app.css";
 import { Route, Switch, useLocation } from "react-router-dom";
 import HomePage from "./screens/homePage";
 import ProductsPage from "./screens/productsPage";
@@ -9,15 +8,23 @@ import HomeNavbar from "./components/headers/HomeNavbar";
 import OtherNavbar from "./components/headers/OtherNavbar";
 import Footer from "./components/footer/index";
 import HelpPage from "./screens/helpPage";
-import { CartItem } from "../lib/types/search";
 import useBasket from "./hooks/useBasket";
+import AuthenticationModal from "./components/auth";
+import "../css/app.css";
 // import Test from "./screens/Test";
 // import Typography from "./MaterialTheme/typography";
+// import { CartItem } from "../lib/types/search";
 
 function App() {
   const location = useLocation(); //hook
-
   const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = useBasket();
+  const [signupOpen, setSignupOpen] = useState<boolean>(false);
+  const [loginOpen, setLoginOpen] = useState<boolean>(false);
+
+  /** HANDLERS **/
+
+  const handleSignupClose = () => setSignupOpen(false);
+  const handleLoginClose = () => setLoginOpen(false);
 
   return (
     <>
@@ -56,6 +63,13 @@ function App() {
         </Route>
       </Switch>
       <Footer />
+
+      <AuthenticationModal
+        signupOpen={signupOpen}
+        loginOpen={loginOpen}
+        handleLoginClose={handleLoginClose}
+        handleSignupClose={handleSignupClose}
+      />
     </>
   );
 }
