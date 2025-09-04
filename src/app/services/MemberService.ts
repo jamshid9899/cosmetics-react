@@ -39,11 +39,11 @@ class MemberService {
   public async signup(input: MemberInput): Promise<Member> {
     try {
       const url = this.path + "/member/signup";
-      const result = await axios.post(url, input, { withCredentials: true });
+      const result = await axios.post(url, input, { withCredentials: true }); //backendimiz frontendimizga <=> cookieni joylaydi
       console.log("signup:", result);
+
       const member: Member = result.data.member;
       console.log("member:", member);
-
       localStorage.setItem("memberData", JSON.stringify(member));
       return member;
     } catch (err) {
@@ -69,16 +69,16 @@ class MemberService {
     }
   }
 
-  public async logout(): Promise<void> {
+  public async logout(): Promise<boolean> {
     try {
-      const url = this.path + "/member/logout";
+      const url = serverApi + `/member/logout`;
       const result = await axios.post(url, {}, { withCredentials: true });
+      console.log("logout", result);
 
-      const member: Member = result.data.member;
-      console.log("logout:", result);
       localStorage.removeItem("memberData");
-    } catch (err: any) {
-      console.error("Error, logout:", err);
+      return result.data.logout;
+    } catch (err) {
+      console.log("Error, logout", err);
       throw err;
     }
   }

@@ -1,7 +1,7 @@
-import { ReactNode, useState } from "react";
-import Cookies from "universal-cookie"; //cookiedagi malumotlarni brauzerda qolga olib beradi
-import { Member } from "../lib/types/member";
-import { GlobalContext } from "../app/hooks/useGlobals";
+import React, { ReactNode, useState } from "react";
+import Cookies from "universal-cookie";
+import { Member } from "../../lib/types/member";
+import { GlobalContext } from "../hooks/useGlobals";
 
 const ContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const cookies = new Cookies();
@@ -12,7 +12,6 @@ const ContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       ? JSON.parse(localStorage.getItem("memberData") as string)
       : null
   );
-  console.log("=== verify ===");
 
   return (
     <GlobalContext.Provider value={{ authMember, setAuthMember }}>

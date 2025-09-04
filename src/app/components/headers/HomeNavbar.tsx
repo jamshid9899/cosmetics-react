@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Box,
   Button,
@@ -9,7 +10,6 @@ import {
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import Basket from "./Basket";
-import React from "react";
 import { CartItem } from "../../../lib/types/search";
 import { useGlobals } from "../../hooks/useGlobals";
 import { Logout } from "@mui/icons-material";
@@ -43,6 +43,7 @@ export default function HomeNavbar(props: HomeNavbarProps) {
     handleCloseLogout,
     handleLogoutRequest,
   } = props;
+
   const { authMember } = useGlobals();
 
   /** HANDLERS **/
@@ -122,8 +123,8 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                 onClick={handleLogoutClick}
               />
             )}
+
             <Menu
-              anchorEl={anchorEl}
               id="account-menu"
               open={Boolean(anchorEl)}
               onClose={handleCloseLogout}

@@ -28,14 +28,15 @@ export default function OtherNavbar(props: OtherNavbarprops) {
     onRemove,
     onDelete,
     onDeleteAll,
-    // setSignupOpen,
+    setSignupOpen,
     setLoginOpen,
     handleLogoutClick,
     anchorEl,
     handleCloseLogout,
     handleLogoutRequest,
   } = props;
-  const { authMember } = useGlobals();
+
+  const { authMember } = useGlobals(); //member ma'lumotlari
 
   return (
     <div className="other-navbar">

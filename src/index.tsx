@@ -8,7 +8,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter as Router } from "react-router-dom";
 import theme from "./app/MaterialTheme";
 import "./css/index.css";
-import ContextProvider from "./context/ContextProvider";
+import ContextProvider from "./app/context/ContextProvider";
 import App from "./app/App";
 
 const container = document.getElementById("root")!; //RealDom
