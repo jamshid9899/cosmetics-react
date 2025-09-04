@@ -1,5 +1,5 @@
 import React, { ReactNode, useState } from "react";
-import Cookies from "universal-cookie";
+import Cookies from "universal-cookie"; //read/write cookies easily in browser
 import { Member } from "../../lib/types/member";
 import { GlobalContext } from "../hooks/useGlobals";
 

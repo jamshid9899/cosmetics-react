@@ -11,7 +11,7 @@ import Footer from "./components/footer";
 import HelpPage from "./screens/helpPage";
 import useBasket from "./hooks/useBasket";
 import AuthenticationModal from "./components/auth";
-import Test from "../app/screens/Test";
+// import Test from "../app/screens/Test";
 import { sweetErrorHandling, sweetTopSuccessAlert } from "../lib/sweetAlert";
 import { Messages } from "../lib/config";
 import { useGlobals } from "./hooks/useGlobals";
