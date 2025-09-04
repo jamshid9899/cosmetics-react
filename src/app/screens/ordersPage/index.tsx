@@ -1,99 +1,137 @@
-import { useState, SyntheticEvent } from "react";
-import { Stack, Box, Container } from "@mui/material";
+import TabContext from "@mui/lab/TabContext";
+import { Box, Button, Container, Stack } from "@mui/material";
+import { SyntheticEvent, useEffect, useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import TabContext from "@mui/lab/TabContext";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PausedOrders from "./PausedOrders";
 import ProcessOrders from "./ProcessOrders";
 import FinishedOrders from "./FinishedOrders";
-import "../../../css/order.css";
 import Divider from "../../components/divider";
-import { Dispatch } from "@reduxjs/toolkit";
-import { Order } from "../../../lib/types/order";
-import { setFinishedOrders, setPausedOrders, setProccessOrders } from "./slice";
 import { useDispatch } from "react-redux";
+import { Dispatch } from "@reduxjs/toolkit";
+import { setPausedOrders, setProccessOrders, setFinishedOrders } from "./slice";
+import "../../../css/order.css";
+import { Order, OrderInquiry, OrderItem } from "../../../lib/types/order";
+import { OrderStatus } from "../../../lib/enums/order.enum";
+import OrderService from "../../services/OrderService";
+import { useGlobals } from "../../hooks/useGlobals";
+import { useHistory } from "react-router-dom";
+import { serverApi } from "../../../lib/config";
+import { MemberType } from "../../../lib/enums/member.enum";
 
-/** REDUX SLICE AND SELECTOR **/
-
-const actionDispactch = (dispatch: Dispatch) => ({
+/** REDUX SLICE & SELECTOR */
+const actionDispatch = (dispatch: Dispatch) => ({
   setPausedOrders: (data: Order[]) => dispatch(setPausedOrders(data)),
-  setProccessOrders: (data: Order[]) => dispatch(setProccessOrders(data)),
+  setProcessOrders: (data: Order[]) => dispatch(setProccessOrders(data)),
   setFinishedOrders: (data: Order[]) => dispatch(setFinishedOrders(data)),
 });
-
 export default function OrdersPage() {
-  const { setPausedOrders, setProccessOrders, setFinishedOrders } =
-    actionDispactch(useDispatch());
-
+  const { setPausedOrders, setProcessOrders, setFinishedOrders } =
+    actionDispatch(useDispatch());
+  const { orderBuilder, authMember } = useGlobals();
+  const history = useHistory();
   const [value, setValue] = useState("1");
+  const [orderInquiry, setOrderinquiry] = useState<OrderInquiry>({
+    page: 1,
+    limit: 5,
+    orderStatus: OrderStatus.PAUSE,
+  });
 
-  /** HANDLERS **/
+  useEffect(() => {
+    const order = new OrderService();
+
+    order
+      .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.PAUSE })
+      .then((data) => setPausedOrders(data))
+      .catch((err) => console.log(err));
+
+    order
+      .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.PROCESS })
+      .then((data) => setProcessOrders(data))
+      .catch((err) => console.log(err));
+
+    order
+      .getMyOrders({ ...orderInquiry, orderStatus: OrderStatus.FINISH })
+      .then((data) => setFinishedOrders(data))
+      .catch((err) => console.log(err));
+  }, [orderInquiry, orderBuilder]);
+
+  /** HANDLERS */
 
   const handleChange = (e: SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
-
+  if (!authMember) history.push("/");
   return (
     <div className="order-page">
-      <Container
-        className="order-container"
-        sx={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
+      <Container className="order-container">
         <Stack className="order-left">
           <TabContext value={value}>
-            <Box className="order-nav-frame">
-              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <Box className={"order-nav-frame"}>
+              <Box
+                sx={{
+                  borderBottom: 1,
+                  borderColor: "divider",
+                  paddingBottom: 3,
+                  paddingLeft: 3,
+                }}
+              >
                 <Tabs
                   value={value}
                   onChange={handleChange}
                   aria-label="basic tabs example"
-                  className="table-list"
+                  className={"table_list"}
                 >
-                  <Tab label="PAUSED ORDERS" value={"1"}></Tab>
-                  <Tab label="PROCESS ORDERS" value={"2"}></Tab>
-                  <Tab label="FINISHED ORDERS" value={"3"}></Tab>
+                  <Tab label="PAUSED ORDERS" value={"1"} />
+                  <Tab label="PROCESS ORDERS" value={"2"} />
+                  <Tab label="FINISHED ORDERS" value={"3"} />
                 </Tabs>
               </Box>
             </Box>
-            <Stack className="order-main-content">
-              <PausedOrders />
-              <ProcessOrders />
+            <Stack className={"order-main-content"}>
+              <PausedOrders setValue={setValue} />
+              <ProcessOrders setValue={setValue} />
               <FinishedOrders />
             </Stack>
           </TabContext>
         </Stack>
-        <Stack className="order-right">
-          <Box className="order-info-box">
-            <Box className="member-box">
-              <div className="order-user-img">
-                <img
-                  src="/icons/default-user.svg"
-                  alt=""
-                  className={"order-user-avatar"}
-                />
-                <div className="order-user-icon-box">
-                  <img
-                    src="/icons/user-badge.svg"
-                    alt=""
-                    className="order-user-prof-img"
-                  />
-                </div>
-              </div>
-              <span className="order-user-name">Justin</span>
-              <span className="order-user-prof">User</span>
-            </Box>
-            <Divider height="4" width="60" bg="#9b9797ff" />
-            <Box className="member-location">
-              <div className="member-location-info">
-                <LocationOnIcon /> Do not exist
-              </div>
-            </Box>
-          </Box>
+
+        <Stack className={"order-right"}>
+          <Stack className="user-detail">
+            <Stack className="user-image">
+              <img
+                alt=""
+                className="user-img"
+                src={
+                  authMember?.memberImage
+                    ? `${serverApi}/${authMember.memberImage}`
+                    : "/icons/default-user.svg"
+                }
+              />
+
+              <Box className={"user-name"}>{authMember?.memberNick}</Box>
+              <Box className={"user-ident"}>{authMember?.memberType}</Box>
+            </Stack>
+
+            <Divider height="1" width="300" bg="black" />
+
+            <Stack className="user-detail-bottom">
+              <img
+                alt=""
+                className="user-location-img"
+                src={
+                  authMember?.memberType === MemberType.RESTAURANT
+                    ? "/icons/restaurant.svg"
+                    : "/icons/user-badge.svg"
+                }
+              />
+              <p className="user-location-p">
+                {authMember?.memberAddress
+                  ? authMember.memberAddress
+                  : "Do not exist"}
+              </p>
+            </Stack>
+          </Stack>
           <Box className="order-payment-info-box">
             <div className="payment-card-number">
               Card number: **** 4090 2002 7495
@@ -117,6 +155,7 @@ export default function OrdersPage() {
               <img src="/icons/visa-card.svg" alt="" />
             </div>
           </Box>
+          ...
         </Stack>
       </Container>
     </div>
