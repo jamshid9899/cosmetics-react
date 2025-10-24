@@ -1,39 +1,38 @@
 import React from "react";
-import { Box, Container, Stack } from "@mui/material";
-import Divider from "../../components/divider";
+import { Box, Container, Stack, LinearProgress } from "@mui/material";
 
 export default function Statistics() {
+  const stats = [
+    { label: "Customer Satisfaction", value: 98 },
+    { label: "Natural Ingredients", value: 92 },
+    { label: "Skin Safety Rating", value: 99 },
+    { label: "Eco-Friendly Packaging", value: 85 },
+  ];
+
   return (
-    <div className="static-frame">
+    <div className="radiance-stats">
       <Container>
-        <Stack className="info">
-          <Stack className="static-box">
-            <Box className="static-num">12</Box>
-            <Box className="static-text">Restaurants</Box>
-          </Stack>
-
-          <Divider height="64" width="2" bg="#E3C08D " />
-
-          <Stack className="static-box">
-            <Box className="static-num">8</Box>
-            <Box className="static-text">Experience</Box>
-          </Stack>
-
-          <Divider height="64" width="2" bg="#E3C08D " />
-
-          <Stack className="static-box">
-            <Box className="static-num">50+</Box>
-            <Box className="static-text">Menu</Box>
-          </Stack>
-
-          <Divider height="64" width="2" bg="#E3C08D " />
-
-          <Stack className="static-box">
-            <Box className="static-num">200+</Box>
-            <Box className="static-text">Clients</Box>
-          </Stack>
+        <Box className="radiance-title">Beauty that Speaks in Numbers</Box>
+        <Stack className="radiance-bars">
+          {stats.map((item, i) => (
+            <Box key={i} className="radiance-bar-item" style={{ position:"relative" }}>
+              <Box className="radiance-label">{item.label}</Box>
+              <Box className="radiance-value">{item.value}%</Box>
+              <LinearProgress
+                variant="determinate"
+                value={item.value}
+                className="radiance-progress"
+              />
+            </Box>
+          ))}
         </Stack>
       </Container>
     </div>
   );
 }
+
+
+
+
+
+

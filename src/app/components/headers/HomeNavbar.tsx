@@ -46,52 +46,32 @@ export default function HomeNavbar(props: HomeNavbarProps) {
 
   const { authMember } = useGlobals();
 
-  /** HANDLERS **/
-
   return (
     <div className="home-navbar">
+      {/* ------------------- Navbar ------------------- */}
       <Container className="navbar-container">
-        <Stack className="menu">
-          <Box>
-            <NavLink to="/">
-              <img
-                className="brand-logo"
-                src="/icons/burak.svg"
-                alt="Brand Logo"
-              />
-            </NavLink>
-          </Box>
-          <Stack className="links">
-            <Box className={"hover-line"}>
-              <NavLink to="/" activeClassName={"underline"}>
-                Home
-              </NavLink>
-            </Box>
-            <Box className={"hover-line"}>
-              <NavLink to="/products" activeClassName={"underline"}>
-                Products
-              </NavLink>
-            </Box>
-            {authMember ? (
-              <Box className={"hover-line"}>
-                <NavLink to="/orders" activeClassName={"underline"}>
-                  Orders
-                </NavLink>
-              </Box>
-            ) : null}
+        <Stack direction="row" justifyContent="space-between" alignItems="center" className="menu">
+          {/* Logo */}
+          <NavLink to="/">
+            <img
+              className="brand-logo"
+              src="/img/default.jpeg" // cosmetics logosi
+              alt="Brand Logo"
+            />
+          </NavLink>
 
-            {authMember ? (
-              <Box className={"hover-line"}>
-                <NavLink to="/member-page" activeClassName={"underline"}>
-                  My Page
-                </NavLink>
-              </Box>
-            ) : null}
-            <Box className={"hover-line"}>
-              <NavLink to="/help" activeClassName={"underline"}>
-                Help
-              </NavLink>
-            </Box>
+          {/* Links + Basket + User */}
+          <Stack direction="row" spacing={4} alignItems="center" className="links">
+            <NavLink to="/" className="nav-link">Home</NavLink>
+            <NavLink to="/products" className="nav-link">Products</NavLink>
+
+            {authMember && (
+              <>
+                <NavLink to="/orders" className="nav-link">Orders</NavLink>
+                <NavLink to="/member-page" className="nav-link">My Page</NavLink>
+              </>
+            )}
+
             <Basket
               cartItems={cartItems}
               onAdd={onAdd}
@@ -101,15 +81,9 @@ export default function HomeNavbar(props: HomeNavbarProps) {
             />
 
             {!authMember ? (
-              <Box>
-                <Button
-                  className=" login-button"
-                  variant="contained"
-                  onClick={() => setLoginOpen(true)}
-                >
-                  Login
-                </Button>
-              </Box>
+              <Button variant="contained" className="login-button" onClick={() => setLoginOpen(true)}>
+                Login
+              </Button>
             ) : (
               <img
                 alt=""
@@ -119,11 +93,11 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                     ? `${serverApi}/${authMember?.memberImage}`
                     : "/icons/default-user.svg"
                 }
-                aria-haspopup={"true"}
                 onClick={handleLogoutClick}
               />
             )}
 
+            {/* Logout Menu */}
             <Menu
               id="account-menu"
               open={Boolean(anchorEl)}
@@ -135,12 +109,6 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                   overflow: "visible",
                   filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
                   mt: 1.5,
-                  "& .MuiAvatar-root": {
-                    width: 32,
-                    height: 32,
-                    ml: -0.5,
-                    mr: 1,
-                  },
                   "&:before": {
                     content: '""',
                     display: "block",
@@ -167,30 +135,30 @@ export default function HomeNavbar(props: HomeNavbarProps) {
             </Menu>
           </Stack>
         </Stack>
-        <Stack className={"header-frame"}>
-          <Stack className={"detail"}>
-            <Box className={"head-main-txt"}>
-              World's Most Delicious Cousine
-            </Box>
-            <Box className={"wel-txt"}>The Choice, not just a choice</Box>
-            <Box className={"service-txt"}> 24 hours service</Box>
-            <Box className={"signup"}>
-              {!authMember ? (
-                <Button
-                  className={"signup-button"}
-                  variant="contained"
-                  onClick={() => setSignupOpen(true)}
-                >
-                  Sign up
-                </Button>
-              ) : null}
-            </Box>
-          </Stack>
-          <Box className={"logo-frame"}>
-            <div className={"logo-image"}></div>
-          </Box>
+
+        {/* ------------------- Banner Text ------------------- */}
+        <Stack className="banner-text" spacing={2} mt={5} alignItems="center">
+          <Box className="head-main-txt">Cosmetics & Skincare</Box>
+          <Box className="wel-txt">Premium Products for Your Beauty</Box>
+          <Box className="service-txt">24 Hours Service</Box>
+          {!authMember && (
+            <Button
+              className="signup-button"
+              variant="contained"
+              onClick={() => setSignupOpen(true)}
+            >
+              Sign Up
+            </Button>
+          )}
         </Stack>
       </Container>
     </div>
   );
 }
+
+
+
+
+
+
+

@@ -1,16 +1,15 @@
 import React, { useEffect } from "react";
 import Statistics from "./Statistics";
-import PopularDishes from "./PopularDishes";
-import NewDishes from "./NewDishes";
+import PopularDishes from "./PopularProducts";
+import NewDishes from "./NewProducts";
 import Advertisement from "./Advertisement";
 import ActiveUsers from "./ActiveUsers";
 import Events from "./Events";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit"; //dispatch = the magic Redux function that sends your action to reducers.
-import { setNewDishes, setPopularDishes, setTopUsers } from "./slice";
+import { setNewProducts, setPopularProducts, setTopUsers } from "./slice";
 import { Product } from "../../../lib/types/product";
 import ProductService from "../../services/ProductService";
-import { ProductCollection } from "../../../lib/enums/product.enums";
 import "../../../css/home.css";
 import { Member } from "../../../lib/types/member";
 import MemberService from "../../services/MemberService";
@@ -18,59 +17,72 @@ import MemberService from "../../services/MemberService";
 /** REDUX SLICE **/
 const actionDispatch = (dispatch: Dispatch) => ({
   //obyekt return bolyapti
-  setPopularDishes: (data: Product[]) => dispatch(setPopularDishes(data)),
-  setNewDishes: (data: Product[]) => dispatch(setNewDishes(data)),
+  setPopularProducts: (data: Product[]) => dispatch(setPopularProducts(data)),
+  setNewProducts: (data: Product[]) => dispatch(setNewProducts(data)),
   setTopUsers: (data: Member[]) => dispatch(setTopUsers(data)),
 });
 
 export default function HomePage() {
-  const { setPopularDishes, setNewDishes, setTopUsers } = actionDispatch(
+  const { setPopularProducts, setNewProducts, setTopUsers } = actionDispatch(
     useDispatch()
   );
 
   useEffect(() => {
-    //Backend server data fetch => Data
-    const product = new ProductService();
-    product
-      .getProducts({
-        page: 1,
-        limit: 4,
-        order: "productViews",
-        productCollection: ProductCollection.DISH,
-      })
-      .then((data) => {
-        console.log("data passed here:", data);
-        setPopularDishes(data); //puts it into Redux store (payload)
-      })
-      .catch((err) => console.log(err));
+  // Backend server data fetch => Data
+  const product = new ProductService();
 
-    product
-      .getProducts({
-        page: 1,
-        limit: 4,
-        order: "createdAt",
-        productCollection: ProductCollection.DISH,
-      })
-      .then((data) => {
-        setNewDishes(data);
-      })
-      .catch((err) => console.log(err));
+  // ✅ POPULAR PRODUCTS
+  product
+    .getProducts({
+      page: 1,
+      limit: 4,
+      order: "productViews",
+    })
+    .then((data) => {
+      console.log("🔥 Popular products raw data:", data); // backenddan kelgan obyekt
+      data.forEach((product: any, index: number) => {
+        console.log(`🔹 Popular product ${index} images:`, product.productImages);
+      });
+      setPopularProducts(data); // Redux store’ga saqlanadi
+    })
+    .catch((err) => console.log(err));
 
-    const memberService = new MemberService();
+  // ✅ NEW PRODUCTS
+  product
+    .getProducts({
+      page: 1,
+      limit: 4,
+      order: "createdAt",
+    })
+    .then((data) => {
+      console.log("🆕 New products raw data:", data); // backenddan kelgan obyekt
+      data.forEach((product: any, index: number) => {
+        console.log(`🔹 New product ${index} images:`, product.productImages);
+      });
+      setNewProducts(data);
+    })
+    .catch((err) => console.log(err));
 
-    memberService
-      .getTopUsers()
-      .then((data) => setTopUsers(data))
-      .catch((err) => console.log(err));
-  }, []);
+  // ✅ TOP USERS
+  const memberService = new MemberService();
+
+  memberService
+    .getTopUsers()
+    .then((data) => {
+      console.log("👤 Top users data:", data); // top users
+      setTopUsers(data);
+    })
+    .catch((err) => console.log(err));
+}, []);
+
 
   return (
     <div className={"homepage"}>
-      <Statistics />
       <PopularDishes />
       <NewDishes />
-      <Advertisement />
       <ActiveUsers />
+      <Advertisement />
+      <Statistics />
       <Events />
     </div>
   );

@@ -1,5 +1,5 @@
 import TabContext from "@mui/lab/TabContext";
-import { Box, Button, Container, Stack } from "@mui/material";
+import { Box, Container, Stack } from "@mui/material";
 import { SyntheticEvent, useEffect, useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import { setPausedOrders, setProccessOrders, setFinishedOrders } from "./slice";
 import "../../../css/order.css";
-import { Order, OrderInquiry, OrderItem } from "../../../lib/types/order";
+import { Order, OrderInquiry } from "../../../lib/types/order";
 import { OrderStatus } from "../../../lib/enums/order.enum";
 import OrderService from "../../services/OrderService";
 import { useGlobals } from "../../hooks/useGlobals";

@@ -1,87 +1,74 @@
-import { Box, Stack } from "@mui/material";
+import React from "react";
+import { Box, Container, Stack } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Autoplay, Navigation, Pagination } from "swiper";
-import { plans } from "../../../lib/data/plans";
+import { Autoplay, Pagination } from "swiper";
+import "swiper/css";
+import "swiper/css/pagination";
 
-SwiperCore.use([Autoplay, Navigation, Pagination]);
+const beautyEvents = [
+  {
+    title: "Radiance Glow Workshop",
+    date: "November 12, 2025",
+    location: "Seoul Beauty Hall",
+    desc: "Join our skincare experts to learn daily glow routines with our newest serum line.",
+    img: "/img/sale1.jpeg",
+  },
+  {
+    title: "Pure Essence Launch",
+    date: "December 3, 2025",
+    location: "Tokyo Grand Studio",
+    desc: "Experience the unveiling of our Pure Essence collection with live demonstrations.",
+    img: "/img/sale2.jpeg",
+  },
+  {
+    title: "Natural Beauty Talk",
+    date: "January 10, 2026",
+    location: "Paris Skin Lounge",
+    desc: "A global conversation on sustainable skincare and natural ingredients.",
+    img: "/img/sale3.jpeg",
+  },
+];
 
 export default function Events() {
   return (
-    <div className={"events-frame"}>
-      <Stack className={"events-main"}>
-        <Box className={"events-text"}>
-          <span className={"category-title"}>Events</span>
-        </Box>
+    <div className="beauty-events-section">
+      <Container>
+        <Stack className="beauty-events-header">
+          <Box className="beauty-events-title">Beauty Moments</Box>
+          <Box className="beauty-events-subtitle">
+            Discover our skincare workshops, new launches, and beauty experiences.
+          </Box>
+        </Stack>
 
         <Swiper
-          className={"events-info swiper-wrapper"}
-          slidesPerView={"auto"}
-          centeredSlides={true}
-          spaceBetween={30}
-          navigation={{
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-          }}
-          pagination={{
-            el: ".swiper-pagination",
-            clickable: true,
-          }}
-          autoplay={{
-            delay: 2000,
-            disableOnInteraction: true,
-          }}
+          modules={[Autoplay, Pagination]}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          pagination={{ clickable: true }}
+          slidesPerView={1.2}
+          centeredSlides
+          spaceBetween={40}
+          loop
+          className="beauty-events-swiper"
         >
-          {plans.map((value, number) => {
-            return (
-              <SwiperSlide key={number} className={"events-info-frame"}>
-                <div className={"events-img"}>
-                  <img src={value.img} className={"events-img"} alt="" />
+          {beautyEvents.map((e, i) => (
+            <SwiperSlide key={i} className="beauty-event-card">
+              <div className="beauty-event-img">
+                <img src={e.img} alt={e.title} />
+              </div>
+
+              <div className="beauty-event-overlay">
+                <h3>{e.title}</h3>
+                <p>{e.desc}</p>
+
+                <div className="beauty-event-info">
+                  <span>📅 {e.date}</span>
+                  <span>📍 {e.location}</span>
                 </div>
-                <Box className={"events-desc"}>
-                  <Box className={"events-bott"}>
-                    <Box className={"bott-left"}>
-                      <div className={"event-title-speaker"}>
-                        <strong>{value.title}</strong>
-                        <div className={"event-organizator"}>
-                          <img src={"/icons/speaker.svg"} alt="" />
-                          <p className={"spec-text-author"}>{value.author}</p>
-                        </div>
-                      </div>
-
-                      <p className={"text-desc"}> {value.desc} </p>
-
-                      <div className={"bott-info"}>
-                        <div className={"bott-info-main"}>
-                          <img src={"/icons/calendar.svg"} alt="" />
-                          {value.date}
-                        </div>
-                        <div className={"bott-info-main"}>
-                          <img src={"/icons/location.svg"} alt="" />
-                          {value.location}
-                        </div>
-                      </div>
-                    </Box>
-                  </Box>
-                </Box>
-              </SwiperSlide>
-            );
-          })}
+              </div>
+            </SwiperSlide>
+          ))}
         </Swiper>
-        <Box className={"prev-next-frame"}>
-          <img
-            src={"/icons/arrow-right.svg"}
-            className={"swiper-button-prev"}
-            alt=""
-          />
-          <div className={"dot-frame-pagination swiper-pagination"}></div>
-          <img
-            src={"/icons/arrow-right.svg"}
-            alt=""
-            className={"swiper-button-next"}
-            style={{ transform: "rotate(-180deg)" }}
-          />
-        </Box>
-      </Stack>
+      </Container>
     </div>
   );
 }

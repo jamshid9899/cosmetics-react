@@ -4,49 +4,48 @@
 }
 
 /* STATISTICS */
-
-.homepage .static-frame {
-  width: 100%;
-  height: 236px;
-  background-color: #343434;
+.radiance-stats {
+  padding:110px 0;
+  background:linear-gradient(180deg,#fffaf4 0%,#fdfbf7 100%);
+}
+.radiance-title {
+  text-align:center;
+  font-family:"Playfair Display",serif;
+  font-size:38px;
+  font-weight:600;
+  color:#b88a44;
+  margin-bottom:70px;
+}
+.radiance-bars {
+  width:70%;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:50px;
+}
+.radiance-label {
+  font-size:18px;
+  font-weight:500;
+  color:#4b3b28;
+}
+.radiance-value {
+  position:absolute;
+  right:0;
+  top:0;
+  color:#b88a44;
+  font-weight:600;
+}
+.radiance-progress {
+  height:9px!important;
+  background-color:#efe3d0!important;
+  border-radius:5px;
+}
+.radiance-progress .MuiLinearProgress-bar {
+  background:linear-gradient(90deg,#dec48c,#b88a44)!important;
+  border-radius:5px;
 }
 
-.homepage .static-frame .info {
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
 
-.homepage .static-frame .info .static-box {
-  width: 200px;
-  height: 116px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.homepage .static-frame .info .static-box .static-num {
-  text-align: center;
-  font-family: "Poppins";
-  font-size: 54px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 80px;
-  color: #d7b686;
-}
-
-.homepage .static-frame .info .static-box .static-text {
-  text-align: center;
-  font-family: "Poppins";
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 30px;
-  color: #d7b586;
-}
 
 /* POPULAR DISHES */
 
@@ -297,190 +296,105 @@
   color: #e3c08d;
 }
 
-/** EVENTS **/
-
-.homepage .events-frame {
+/* 💄 BEAUTY EVENTS SECTION */
+.beauty-events-section {
   width: 100%;
-  height: 745px;
-  background: #f8f8ff;
+  padding: 120px 0;
+  background: linear-gradient(180deg, #fffaf9 0%, #f8f8ff 100%);
   display: flex;
-}
-
-.homepage .events-frame .category-title {
-  font-family: "Dancing Script";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 36px;
-  line-height: 43px;
-  padding-top: 20px;
-}
-
-.homepage .events-frame .events-main {
-  position: relative;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.homepage .events-frame .events-main .events-text {
-  width: auto;
-  height: 70px;
-  margin-bottom: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.homepage .events-frame .events-main .prev-next-frame {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 250px;
-  margin: 40px 0 40px 0;
-  height: 25px;
-}
-
-.homepage .events-frame .dot-frame-pagination {
-  position: relative;
-  width: auto;
-  display: flex;
-}
-
-.homepage .events-frame .events-main .events-info {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.homepage .events-frame .events-info .events-info-frame {
-  position: relative;
-  width: 500px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.homepage .events-frame .events-img {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  border-radius: 10px;
-  background-size: cover;
-}
-
-.homepage .events-frame .events-desc {
-  position: absolute;
-  margin-bottom: 7px;
-  padding: 10px;
-  display: flex;
-  width: 90%;
-  height: auto;
-  bottom: 5px;
-  background: #f8f8ff;
-  box-shadow: 0px 40px 30px rgba(25, 25, 46, 0.04);
-  border-radius: 8px;
-}
-
-.homepage .events-frame .events-desc .events-bott {
-  width: 97%;
-  height: auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.homepage .events-frame .events-desc .events-bott .bott-left {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.homepage .events-frame .bott-left .event-title-speaker {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.homepage .events-frame .event-title-speaker .event-organizator {
-  display: flex;
-  align-items: center;
-}
-
-.homepage .events-frame .event-title-speaker .event-organizator img {
-  width: 20px;
-  margin-right: 10px;
-}
-
-.homepage .events-frame .event-organizator .spec-text-author {
-  font-family: "GT Walsheim Pro";
-  font-style: normal;
-  line-height: 34px;
-  color: #140342;
-}
-
-.homepage .events-frame .bott-left .text-desc {
-  margin-top: 10px;
-  font-family: "GT Walsheim Pro";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 17px;
-  line-height: 26px;
-  color: #4f547b;
-}
-
-.homepage .events-frame .bott-left .bott-info {
-  margin-top: 10px;
-  display: flex;
-  justify-content: flex-end;
-  flex-direction: row;
-  width: 100%;
-  height: 16px;
-}
-
-.homepage .events-frame .bott-info .bott-info-main {
-  margin-left: 10px;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  width: auto;
-  height: 100%;
-  font-family: "GT Walsheim Pro";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
-  color: #4f547b;
-}
-
-.homepage .events-frame .bott-info .bott-info-main img {
-  margin-right: 10px;
-}
-
-.homepage .events-frame .swiper-wrapper {
-  display: flex;
-  flex-direction: row;
-}
-
-.homepage .events-frame .swiper-pagination-bullet {
-  margin-right: 5px;
-  width: 8px;
-  height: 8px;
+.beauty-events-header {
   text-align: center;
-  opacity: 1;
-  background: #f8f8ff;
-  border-radius: 50%;
+  margin-bottom: 60px;
 }
 
-.homepage .events-frame .swiper-pagination-bullet-active {
-  background: #343434;
-  border-radius: 50%;
+.beauty-events-title {
+  font-family: "Playfair Display", serif;
+  font-size: 40px;
+  font-weight: 600;
+  color: #c59856;
+  letter-spacing: 1px;
+}
+
+.beauty-events-subtitle {
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  color: #555;
+  margin-top: 10px;
+}
+
+.beauty-events-swiper {
+  width: 100%;
+  padding-bottom: 60px;
+}
+
+.beauty-event-card {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  box-shadow: 0 10px 30px rgba(180, 140, 80, 0.1);
+}
+
+.beauty-event-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 40px rgba(180, 140, 80, 0.2);
+}
+
+.beauty-event-img img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+.beauty-event-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 30px 25px;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.05) 70%
+  );
+  color: #fff;
+  border-radius: 18px;
+}
+
+.beauty-event-overlay h3 {
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.beauty-event-overlay p {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #eaeaea;
+  margin-bottom: 15px;
+}
+
+.beauty-event-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #f5d28b;
+  font-weight: 500;
+}
+
+.swiper-pagination-bullet {
+  background: #d9d9d9;
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background: #c59856;
+  transform: scale(1.2);
 }
