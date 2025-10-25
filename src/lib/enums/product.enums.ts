@@ -1,28 +1,31 @@
 export enum ProductSize {
-  SMALL = "SMALL",
-  NORMAL = "NORMAL",
-  LARGE = "LARGE",
-  SET = "SET",
+  SMALL = "SMALL",      // kichik qadoq
+  NORMAL = "NORMAL",    // standart
+  LARGE = "LARGE",      // katta qadoq
+  SET = "SET",          // set (masalan, atir + krem)
 }
 
 export enum ProductVolume {
-  HALF = 0.5,
-  ONE = 1,
-  ONE_PONT_TWO = 1.2,
-  ONE_POINT_FIVE = 1.5,
-  TWO = 2,
+  TEN_ML = 10,
+  THIRTY_ML = 30,
+  FIFTY_ML = 50,
+  HUNDRED_ML = 100,
+  ONE_FIFTY_ML = 150,
+  TWO_HUNDRED_ML = 200,
 }
 
 export enum ProductStatus {
-  PAUSE = "PAUSE",
-  PROCESS = "PROCESS",
-  DELETE = "DELETE",
+  PAUSE = "PAUSE",      // savdoda emas
+  ACTIVE = "ACTIVE",    // aktiv savdoda
+  DELETE = "DELETE",    // o‘chirilgan
 }
 
 export enum ProductCollection {
-  DISH = "DISH",
-  SALAD = "SALAD",
-  DESSERT = "DESSERT",
-  DRINK = "DRINK",
-  OTHER = "OTHER",
+  PERFUME = "PERFUME",          // atirlar
+  SKINCARE = "SKINCARE",        // teri parvarishi
+  MAKEUP = "MAKEUP",            // makiyaj
+  HAIRCARE = "HAIRCARE",        // soch parvarishi
+  BODYCARE = "BODYCARE",        // tana parvarishi
+  ACCESSORY = "ACCESSORY",      // aksessuarlar
+  OTHER = "OTHER",              // boshqa
 }

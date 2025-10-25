@@ -120,7 +120,7 @@ export default function OrdersPage() {
                 alt=""
                 className="user-location-img"
                 src={
-                  authMember?.memberType === MemberType.RESTAURANT
+                  authMember?.memberType === MemberType.ADMIN
                     ? "/icons/restaurant.svg"
                     : "/icons/user-badge.svg"
                 }

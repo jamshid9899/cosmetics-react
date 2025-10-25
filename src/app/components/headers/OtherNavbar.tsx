@@ -46,7 +46,7 @@ export default function OtherNavbar(props: OtherNavbarprops) {
             <NavLink to="/">
               <img
                 className="brand-logo"
-                src="/icons/burak.svg"
+                src="/img/default.jpeg"
                 alt="Brand Logo"
               />
             </NavLink>

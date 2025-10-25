@@ -49,7 +49,7 @@ export default function UserPage() {
                     <img
                       alt=""
                       src={
-                        authMember?.memberType === MemberType.RESTAURANT
+                        authMember?.memberType === MemberType.ADMIN
                           ? "/icons/restaurant.svg"
                           : "/icons/user-badge.svg"
                       }

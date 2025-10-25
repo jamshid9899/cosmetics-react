@@ -64,43 +64,142 @@
 }
 
 /* Banner text */
+/* Banner text */
 .banner-text {
-    margin-top: 120px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: flex-start;
-    padding-left: 50px;
-    color: #fff;
+  position: relative;
+  margin-top: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-start; /* chapga hizaladi */
+  padding-left: 90px; /* chapga yaqinlashtiradi */
+  max-width: 550px; /* kenglik cheklab, text fokusni beradi */
+  color: #fff;
+  z-index: 2;
 }
 
 .head-main-txt {
-    font-family: "Roboto Serif", serif;
-    font-size: 50px;
-    font-weight: 500;
+  font-family: "Playfair Display", serif;
+  font-size: 60px; /* biroz kattaroq, brend hisi uchun */
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 .wel-txt {
-    font-family: "Roboto Serif", serif;
-    font-size: 24px;
-    color: #d7b686;
+  font-family: "Poppins", sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  color: #d7b686;
 }
 
 .service-txt {
-    font-family: "Roboto Serif", serif;
-    font-size: 20px;
-    color: #d5d5d5;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  color: #d5d5d5;
 }
 
 .signup-button {
-    margin-top: 20px;
-    padding: 15px 40px;
-    font-size: 16px;
-    font-family: Poppins, sans-serif;
-    border-radius: 6px;
-    background: #1976d2;
-    color: #fff;
+  margin-top: 50px;
+  padding: 26px 90px;            /* 👈 juda katta bo‘ldi */
+  font-size: 26px;               /* 👈 matn katta */
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(90deg, #dcb877, rgb(184, 138, 68));
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(184, 138, 68, 0.45);
+  transition: all 0.35s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  min-width: 320px;              
+  text-align: center;
 }
+
+.signup-button:hover {
+  background: linear-gradient(90deg, #54b844, #dcb877);
+  transform: scale(1.05) translateY(-4px);
+  box-shadow: 0 16px 36px rgba(184, 138, 68, 0.55);
+}
+
+
+
+.other-navbar {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url("/public/img/picture3.webp") no-repeat center/cover;
+}
+
+
+
+.other-navbar .navbar-container {
+    margin-top: 55px;
+}
+.other-navbar .navbar-container .menu {
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.other-navbar .navbar-container .menu .brand-logo{
+    width: 125px;
+    height: 30px;
+}
+.other-navbar .navbar-container .menu .links {
+    min-width: 700px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.other-navbar .navbar-container .menu .links .login-button {
+    background: #3776cc;
+    color: f8f8ff;
+}
+
+.other-navbar .navbar-container .menu .user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 24px;
+}
+
+.other-navbar a {
+    text-decoration: none;
+}
+
+.other-navbar .hover-line a {
+    color: #f8f8ff;
+    z-index: 100;
+}
+
+.other-navbar .underline {
+    display: block;
+    content: "";
+    border-bottom: solid 2px #d7b686;
+}
+
+.other-navbar .hover-line:after {
+    display: block;
+    content: "";
+    border-bottom: solid 2px #d7b686;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+}
+
+.other-navbar .hover-line:after {
+    transform: scaleX(1);
+}
+
+.other-navbar div.hover-line:after {
+    transform-origin: 0% 50%;
+}
+
+
 
 /* Basket */
 .basket-frame {

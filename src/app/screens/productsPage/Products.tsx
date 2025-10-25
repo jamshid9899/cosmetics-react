@@ -54,7 +54,6 @@ export default function Products(props: ProductProps) {
     page: 1,
     limit: 8,
     order: "createdAt",
-    productCollection: ProductCollection.DISH,
     search: "",
   });
 
@@ -110,7 +109,7 @@ export default function Products(props: ProductProps) {
       <Container>
         <Stack flexDirection={"column"} alignItems={"center"}>
           <Stack className={"avatar-big-box"}>
-            <Box className="title">Burak Restaurant</Box>
+            <Box className="title">Cosmetics</Box>
             <Box className={"search-bar"}>
               <div className="search-container">
                 <input
@@ -187,89 +186,101 @@ export default function Products(props: ProductProps) {
           </Stack>
 
           <Stack className={"list-category-section"}>
-            <Stack className={"product-category"}>
-              <div className={"category-main"}>
-                <Button
-                  variant={"contained"}
-                  color={
-                    productSearch.productCollection === ProductCollection.OTHER
-                      ? "primary"
-                      : "secondary"
-                  }
-                  onClick={() =>
-                    searchCollectionHandler(ProductCollection.OTHER)
-                  }
-                >
-                  Other
-                </Button>
+  <Stack className={"product-category"}>
+    <div className={"category-main"}>
 
-                <Button
-                  variant={"contained"}
-                  color={
-                    productSearch.productCollection ===
-                    ProductCollection.DESSERT
-                      ? "primary"
-                      : "secondary"
-                  }
-                  onClick={() =>
-                    searchCollectionHandler(ProductCollection.DESSERT)
-                  }
-                >
-                  Dessert
-                </Button>
+      <Button
+        variant={"contained"}
+        color={
+          productSearch.productCollection === ProductCollection.PERFUME
+            ? "primary"
+            : "secondary"
+        }
+        onClick={() => searchCollectionHandler(ProductCollection.PERFUME)}
+      >
+        Perfume
+      </Button>
 
-                <Button
-                  variant={"contained"}
-                  color={
-                    productSearch.productCollection === ProductCollection.DRINK
-                      ? "primary"
-                      : "secondary"
-                  }
-                  onClick={() =>
-                    searchCollectionHandler(ProductCollection.DRINK)
-                  }
-                >
-                  Drink
-                </Button>
+      <Button
+        variant={"contained"}
+        color={
+          productSearch.productCollection === ProductCollection.SKINCARE
+            ? "primary"
+            : "secondary"
+        }
+        onClick={() => searchCollectionHandler(ProductCollection.SKINCARE)}
+      >
+        Skincare
+      </Button>
 
-                <Button
-                  variant={"contained"}
-                  color={
-                    productSearch.productCollection === ProductCollection.SALAD
-                      ? "primary"
-                      : "secondary"
-                  }
-                  onClick={() =>
-                    searchCollectionHandler(ProductCollection.SALAD)
-                  }
-                >
-                  Salad
-                </Button>
+      <Button
+        variant={"contained"}
+        color={
+          productSearch.productCollection === ProductCollection.MAKEUP
+            ? "primary"
+            : "secondary"
+        }
+        onClick={() => searchCollectionHandler(ProductCollection.MAKEUP)}
+      >
+        Makeup
+      </Button>
 
-                <Button
-                  variant={"contained"}
-                  color={
-                    productSearch.productCollection === ProductCollection.DISH
-                      ? "primary"
-                      : "secondary"
-                  }
-                  onClick={() =>
-                    searchCollectionHandler(ProductCollection.DISH)
-                  }
-                >
-                  Dish
-                </Button>
-              </div>
-            </Stack>
+      <Button
+        variant={"contained"}
+        color={
+          productSearch.productCollection === ProductCollection.HAIRCARE
+            ? "primary"
+            : "secondary"
+        }
+        onClick={() => searchCollectionHandler(ProductCollection.HAIRCARE)}
+      >
+        Haircare
+      </Button>
+
+      <Button
+        variant={"contained"}
+        color={
+          productSearch.productCollection === ProductCollection.BODYCARE
+            ? "primary"
+            : "secondary"
+        }
+        onClick={() => searchCollectionHandler(ProductCollection.BODYCARE)}
+      >
+        Bodycare
+      </Button>
+
+      <Button
+        variant={"contained"}
+        color={
+          productSearch.productCollection === ProductCollection.ACCESSORY
+            ? "primary"
+            : "secondary"
+        }
+        onClick={() => searchCollectionHandler(ProductCollection.ACCESSORY)}
+      >
+        Accessory
+      </Button>
+
+      <Button
+        variant={"contained"}
+        color={
+          productSearch.productCollection === ProductCollection.OTHER
+            ? "primary"
+            : "secondary"
+        }
+        onClick={() => searchCollectionHandler(ProductCollection.OTHER)}
+      >
+        Other
+      </Button>
+
+    </div>
+  </Stack>
+
 
             <Stack className={"product-wrapper"}>
               {products.length !== 0 ? (
                 products.map((product) => {
                   const imagePath = `${serverApi}/${product.productImages[0]}`;
-                  const sizeVolume =
-                    product.productCollection === ProductCollection.DRINK
-                      ? product.productVolume + "litre"
-                      : product.productSize + "size";
                   return (
                     <Stack
                       key={product._id}
@@ -280,7 +291,6 @@ export default function Products(props: ProductProps) {
                         className={"product-img"}
                         sx={{ backgroundImage: `url(${imagePath})` }}
                       >
-                        <div className={"product-sale"}>{sizeVolume}</div>
                         <Button
                           className={"shop-btn product-actions"}
                           onClick={(e) => {

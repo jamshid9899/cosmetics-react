@@ -28,7 +28,7 @@ export default function NewProducts() {
     <div className={"new-products-frame"}>
       <Container>
         <Stack className={"main"}>
-          <Box className={"category-title"}>Fresh Menu</Box>
+          <Box className={"category-title"}>New Products</Box>
           <Stack className={"cards-frame"}>
             <CssVarsProvider>
               {newProducts.length !== 0 ? (

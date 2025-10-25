@@ -69,7 +69,7 @@ export default function HomePage() {
   memberService
     .getTopUsers()
     .then((data) => {
-      console.log("👤 Top users data:", data); // top users
+      console.log("👤Top users data:", data); // top users
       setTopUsers(data);
     })
     .catch((err) => console.log(err));

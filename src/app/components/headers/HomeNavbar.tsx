@@ -48,22 +48,18 @@ export default function HomeNavbar(props: HomeNavbarProps) {
 
   return (
     <div className="home-navbar">
-      {/* ------------------- Navbar ------------------- */}
       <Container className="navbar-container">
         <Stack direction="row" justifyContent="space-between" alignItems="center" className="menu">
-          {/* Logo */}
+          {/* LOGO */}
           <NavLink to="/">
-            <img
-              className="brand-logo"
-              src="/img/default.jpeg" // cosmetics logosi
-              alt="Brand Logo"
-            />
+            <img className="brand-logo" src="/img/default.jpeg" alt="Brand Logo" />
           </NavLink>
 
-          {/* Links + Basket + User */}
+          {/* LINKS */}
           <Stack direction="row" spacing={4} alignItems="center" className="links">
             <NavLink to="/" className="nav-link">Home</NavLink>
             <NavLink to="/products" className="nav-link">Products</NavLink>
+            <NavLink to="/help" className="nav-link">Help</NavLink>
 
             {authMember && (
               <>
@@ -72,6 +68,7 @@ export default function HomeNavbar(props: HomeNavbarProps) {
               </>
             )}
 
+            {/* BASKET */}
             <Basket
               cartItems={cartItems}
               onAdd={onAdd}
@@ -86,18 +83,18 @@ export default function HomeNavbar(props: HomeNavbarProps) {
               </Button>
             ) : (
               <img
-                alt=""
                 className="user-avatar"
                 src={
                   authMember?.memberImage
-                    ? `${serverApi}/${authMember?.memberImage}`
+                    ? `${serverApi}/${authMember.memberImage}`
                     : "/icons/default-user.svg"
                 }
+                alt="user"
                 onClick={handleLogoutClick}
               />
             )}
 
-            {/* Logout Menu */}
+            {/* LOGOUT MENU */}
             <Menu
               id="account-menu"
               open={Boolean(anchorEl)}
@@ -128,7 +125,7 @@ export default function HomeNavbar(props: HomeNavbarProps) {
             >
               <MenuItem onClick={handleLogoutRequest}>
                 <ListItemIcon>
-                  <Logout fontSize="small" style={{ color: "blue" }} />
+                  <Logout fontSize="small" sx={{ color: "#b88a44" }} />
                 </ListItemIcon>
                 Logout
               </MenuItem>
@@ -136,8 +133,8 @@ export default function HomeNavbar(props: HomeNavbarProps) {
           </Stack>
         </Stack>
 
-        {/* ------------------- Banner Text ------------------- */}
-        <Stack className="banner-text" spacing={2} mt={5} alignItems="center">
+        {/* HERO BANNER */}
+        <Stack className="banner-text" spacing={2}>
           <Box className="head-main-txt">Cosmetics & Skincare</Box>
           <Box className="wel-txt">Premium Products for Your Beauty</Box>
           <Box className="service-txt">24 Hours Service</Box>
@@ -155,7 +152,6 @@ export default function HomeNavbar(props: HomeNavbarProps) {
     </div>
   );
 }
-
 
 
 
