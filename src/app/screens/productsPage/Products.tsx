@@ -9,11 +9,9 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
-
 import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { setProducts } from "./slice";
@@ -25,6 +23,8 @@ import { ProductCollection } from "../../../lib/enums/product.enums";
 import { serverApi } from "../../../lib/config";
 import { useHistory } from "react-router-dom";
 import { CartItem } from "../../../lib/types/search";
+
+
 
 /** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -39,24 +39,43 @@ interface ProductProps {
   onAdd: (item: CartItem) => void;
 }
 
-const familyBrands = [
-  { brandName: "Gurme", imagePath: "/img/gurme.webp" },
-  { brandName: "Seafood", imagePath: "/img/seafood.webp" },
-  { brandName: "Sweets", imagePath: "/img/sweets.webp" },
-  { brandName: "Doner", imagePath: "/img/doner.webp" },
+const brands = [
+  { name: "Dior", image: "/img/dior.png" },
+  { name: "Nivea", image: "/img/nivea.webp" },
+  { name: "The Ordinary", image: "/img/theordinary.webp" },
+  { name: "Estée Lauder", image: "/img/estee.webp" },
+  { name: "Innisfree", image: "/img/innisfree.webp" },
+  { name: "Laneige", image: "/img/laneige.webp" },
+];
+const tips = [
+  {
+    title: "Morning Skincare Routine",
+    desc: "Start your day fresh with a simple and effective skincare routine that hydrates and protects your skin.",
+    image: "/img/tips1.webp",
+  },
+  {
+    title: "Top 5 Hydrating Ingredients",
+    desc: "Learn about the most powerful moisturizing ingredients and how they benefit your skin.",
+    image: "/img/tips4.webp",
+  },
+  {
+    title: "Night Ritual for Glowing Skin",
+    desc: "Discover how to let your skin repair overnight with the best evening skincare practices.",
+    image: "/img/tips5.webp",
+  },
 ];
 
-export default function Products(props: ProductProps) {
-  const { onAdd } = props;
+
+export default function Products({ onAdd }: ProductProps) {
   const { setProducts } = actionDispatch(useDispatch());
-  const { products } = useSelector(productsRetriever); //use selector butun bunkerdi qolga olib beradi
+  const { products } = useSelector(productsRetriever);
+
   const [productSearch, setProductSearch] = useState<ProductInquiry>({
     page: 1,
     limit: 8,
     order: "createdAt",
     search: "",
   });
-
   const [searchText, setSearchText] = useState<string>("");
 
   const history = useHistory();
@@ -77,27 +96,20 @@ export default function Products(props: ProductProps) {
   }, [searchText]);
 
   /** HANDLERS **/
-
   const searchCollectionHandler = (collection: ProductCollection) => {
-    productSearch.page = 1;
-    productSearch.productCollection = collection;
-    setProductSearch({ ...productSearch });
+    setProductSearch({ ...productSearch, page: 1, productCollection: collection });
   };
 
   const searchOrderHandler = (order: string) => {
-    productSearch.page = 1;
-    productSearch.order = order;
-    setProductSearch({ ...productSearch });
+    setProductSearch({ ...productSearch, page: 1, order });
   };
 
   const searchProductHandler = () => {
-    productSearch.search = searchText;
-    setProductSearch({ ...productSearch });
+    setProductSearch({ ...productSearch, search: searchText });
   };
 
   const paginationHandler = (e: ChangeEvent<any>, value: number) => {
-    productSearch.page = value;
-    setProductSearch({ ...productSearch });
+    setProductSearch({ ...productSearch, page: value });
   };
 
   const chooseDishHandler = (id: string) => {
@@ -107,28 +119,24 @@ export default function Products(props: ProductProps) {
   return (
     <div className="products">
       <Container>
-        <Stack flexDirection={"column"} alignItems={"center"}>
-          <Stack className={"avatar-big-box"}>
+        <Stack flexDirection="column" alignItems="center">
+          {/* ======= SEARCH HEADER ======= */}
+          <Stack className="avatar-big-box">
             <Box className="title">Cosmetics</Box>
-            <Box className={"search-bar"}>
+            <Box className="search-bar">
               <div className="search-container">
                 <input
-                  className={"search-input"}
+                  className="search-input"
                   type="search"
                   placeholder="Type here"
-                  name={"singleResearch"}
                   value={searchText}
-                  onChange={(e) => {
-                    setSearchText(e.target.value);
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") searchProductHandler();
-                  }}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && searchProductHandler()}
                 />
                 <Button
                   className="search-button"
-                  color={"primary"}
-                  variant={"contained"}
+                  color="primary"
+                  variant="contained"
                   onClick={searchProductHandler}
                 >
                   <Typography variant="button" sx={{ color: "primary", mr: 1 }}>
@@ -144,40 +152,41 @@ export default function Products(props: ProductProps) {
             </Box>
           </Stack>
 
-          <Stack className={"dishes-filter-section"}>
-            <Stack className={"dishes-filter-box"}>
+          {/* ======= FILTER BUTTONS ======= */}
+          <Stack className="dishes-filter-section">
+            <Stack className="dishes-filter-box">
               <Button
-                variant={"contained"}
+                variant="contained"
                 color={
                   productSearch.order === "createdAt" ? "primary" : "secondary"
                 }
-                className={"order"}
+                className="order"
                 onClick={() => searchOrderHandler("createdAt")}
               >
                 New
               </Button>
 
               <Button
-                variant={"contained"}
+                variant="contained"
                 color={
                   productSearch.order === "productPrice"
                     ? "primary"
                     : "secondary"
                 }
-                className={"order"}
+                className="order"
                 onClick={() => searchOrderHandler("productPrice")}
               >
                 Price
               </Button>
 
               <Button
-                variant={"contained"}
+                variant="contained"
                 color={
                   productSearch.order === "productViews"
                     ? "primary"
                     : "secondary"
                 }
-                className={"order"}
+                className="order"
                 onClick={() => searchOrderHandler("productViews")}
               >
                 Views
@@ -185,115 +194,46 @@ export default function Products(props: ProductProps) {
             </Stack>
           </Stack>
 
-          <Stack className={"list-category-section"}>
-  <Stack className={"product-category"}>
-    <div className={"category-main"}>
+          {/* ======= CATEGORY SECTION ======= */}
+          <Stack className="list-category-section">
+            <Stack className="product-category">
+              <div className="category-main">
+                {Object.entries(ProductCollection).map(([key, value]) => (
+                  <Button
+                    key={key}
+                    variant="contained"
+                    color={
+                      productSearch.productCollection === value
+                        ? "primary"
+                        : "secondary"
+                    }
+                    onClick={() => searchCollectionHandler(value)}
+                  >
+                    {key.charAt(0) + key.slice(1).toLowerCase()}
+                  </Button>
+                ))}
+              </div>
+            </Stack>
 
-      <Button
-        variant={"contained"}
-        color={
-          productSearch.productCollection === ProductCollection.PERFUME
-            ? "primary"
-            : "secondary"
-        }
-        onClick={() => searchCollectionHandler(ProductCollection.PERFUME)}
-      >
-        Perfume
-      </Button>
-
-      <Button
-        variant={"contained"}
-        color={
-          productSearch.productCollection === ProductCollection.SKINCARE
-            ? "primary"
-            : "secondary"
-        }
-        onClick={() => searchCollectionHandler(ProductCollection.SKINCARE)}
-      >
-        Skincare
-      </Button>
-
-      <Button
-        variant={"contained"}
-        color={
-          productSearch.productCollection === ProductCollection.MAKEUP
-            ? "primary"
-            : "secondary"
-        }
-        onClick={() => searchCollectionHandler(ProductCollection.MAKEUP)}
-      >
-        Makeup
-      </Button>
-
-      <Button
-        variant={"contained"}
-        color={
-          productSearch.productCollection === ProductCollection.HAIRCARE
-            ? "primary"
-            : "secondary"
-        }
-        onClick={() => searchCollectionHandler(ProductCollection.HAIRCARE)}
-      >
-        Haircare
-      </Button>
-
-      <Button
-        variant={"contained"}
-        color={
-          productSearch.productCollection === ProductCollection.BODYCARE
-            ? "primary"
-            : "secondary"
-        }
-        onClick={() => searchCollectionHandler(ProductCollection.BODYCARE)}
-      >
-        Bodycare
-      </Button>
-
-      <Button
-        variant={"contained"}
-        color={
-          productSearch.productCollection === ProductCollection.ACCESSORY
-            ? "primary"
-            : "secondary"
-        }
-        onClick={() => searchCollectionHandler(ProductCollection.ACCESSORY)}
-      >
-        Accessory
-      </Button>
-
-      <Button
-        variant={"contained"}
-        color={
-          productSearch.productCollection === ProductCollection.OTHER
-            ? "primary"
-            : "secondary"
-        }
-        onClick={() => searchCollectionHandler(ProductCollection.OTHER)}
-      >
-        Other
-      </Button>
-
-    </div>
-  </Stack>
-
-
-            <Stack className={"product-wrapper"}>
+            {/* ======= PRODUCT GRID ======= */}
+            <Stack className="product-wrapper">
               {products.length !== 0 ? (
                 products.map((product) => {
                   const imagePath = `${serverApi}/${product.productImages[0]}`;
                   return (
                     <Stack
                       key={product._id}
-                      className={"product-card"}
+                      className="product-card"
                       onClick={() => chooseDishHandler(product._id)}
                     >
                       <Stack
-                        className={"product-img"}
+                        className="product-img"
                         sx={{ backgroundImage: `url(${imagePath})` }}
                       >
                         <Button
-                          className={"shop-btn product-actions"}
+                          className="shop-btn product-actions"
                           onClick={(e) => {
+                            e.stopPropagation();
                             onAdd({
                               _id: product._id,
                               quantity: 1,
@@ -301,42 +241,30 @@ export default function Products(props: ProductProps) {
                               price: product.productPrice,
                               image: product.productImages[0],
                             });
-                            e.stopPropagation();
                           }}
                         >
                           <img
-                            src={"/icons/shopping-cart.svg"}
+                            src="/icons/shopping-cart.svg"
                             alt=""
                             style={{ display: "flex" }}
                           />
                         </Button>
 
-                        <Button
-                          className={"view-btn product-actions"}
-                          sx={{ right: "36px" }}
-                        >
-                          <Badge
-                            badgeContent={product.productViews}
-                            color={"secondary"}
-                          >
+                        <Button className="view-btn product-actions" sx={{ right: "36px" }}>
+                          <Badge badgeContent={product.productViews} color="secondary">
                             <RemoveRedEyeIcon
                               sx={{
                                 color:
                                   product.productViews === 0 ? "gray" : "white",
                               }}
-                            ></RemoveRedEyeIcon>
+                            />
                           </Badge>
                         </Button>
                       </Stack>
-                      <Box className={"product-desc"}>
-                        <span className={"product-title"}>
-                          {product.productName}
-                        </span>
 
-                        <div
-                          className={"product-price"}
-                          style={{ color: "#FF9200" }}
-                        >
+                      <Box className="product-desc">
+                        <span className="product-title">{product.productName}</span>
+                        <div className="product-price" style={{ color: "#FF9200" }}>
                           <MonetizationOnIcon />
                           {product.productPrice}
                         </div>
@@ -345,11 +273,13 @@ export default function Products(props: ProductProps) {
                   );
                 })
               ) : (
-                <Box className={"no-data"}>Products are not available</Box>
+                <Box className="no-data">Products are not available</Box>
               )}
             </Stack>
           </Stack>
-          <Stack className={"pagination-section"}>
+
+          {/* ======= PAGINATION ======= */}
+          <Stack className="pagination-section">
             <Pagination
               count={
                 products.length !== 0
@@ -361,7 +291,7 @@ export default function Products(props: ProductProps) {
                 <PaginationItem
                   components={{ previous: ArrowBack, next: ArrowForward }}
                   {...item}
-                  color={"secondary"}
+                  color="secondary"
                 />
               )}
               onChange={paginationHandler}
@@ -370,59 +300,67 @@ export default function Products(props: ProductProps) {
         </Stack>
       </Container>
 
-      <div className={"brand-logo"}>
-        <Container>
-          <Stack className={"brand-logo-frame"}>
-            <Stack>
-              <Typography
-                className={"brand-logo-title"}
-                sx={{
-                  fontFamily: "Poppins",
-                  fontSize: "30px",
-                  color: "tan",
-                }}
-              >
-                Our Family Brands
-              </Typography>
-            </Stack>
-            <Stack className={"card"}>
-              {familyBrands.length !== 0 ? (
-                familyBrands.map((ele, index) => {
-                  return (
-                    <Stack key={index} className={"brands-card"}>
-                      <img src={ele.imagePath} alt="nothing" />
-                    </Stack>
-                  );
-                })
-              ) : (
-                <Box className={"no-data"}>No family brands Available</Box>
-              )}
-            </Stack>
-          </Stack>
-        </Container>
-      </div>
+      {/* ======= BRANDS ======= */}
+    <div className="brands-section">
+      <h2 className="brands-title">Explore Our Brands</h2>
+      <p className="brands-subtitle">
+        Discover the world’s most loved skincare and beauty labels
+      </p>
 
-      <div className={"address"}>
-        <Container>
-          <Stack className={"address-area"}>
-            <Box className={"title"}>Our Address</Box>
-
-            <iframe
-              title="Adress"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d96344.69019996887!2d72.27194424083031!3d40.779084963529165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38bcecc22df6d3a9%3A0xb3a2b23f51081724!2sStatue%20Of%20Z.M.%20Babur!5e0!3m2!1sen!2skr!4v1753951976534!5m2!1sen!2skr"
-              width="1320"
-              height="500"
-              style={{
-                marginTop: "60px",
-                border: 0,
-              }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
-          </Stack>
-        </Container>
+      <div className="brands-scroll">
+        {brands.length ? (
+          brands.map((brand) => (
+            <div key={brand.name} className="brand-card">
+              <img src={brand.image} alt={brand.name} />
+              <p>{brand.name}</p>
+            </div>
+          ))
+        ) : (
+          <Box className="no-data">No Brands Available</Box>
+        )}
       </div>
+    </div>
+  );
+
+
+      {/* ======= Use Routine ======= */}
+   <div className="beauty-tips-section">
+  <Container>
+    <Stack className="beauty-tips-frame">
+      <Typography className="beauty-tips-title">
+        Discover Skincare Insights
+      </Typography>
+      <Typography className="beauty-tips-subtitle">
+        Explore the secrets of radiant, healthy skin with our expert beauty
+        tips and guides.
+      </Typography>
+
+      <Stack
+        className="beauty-tips-grid"
+        direction="row"
+        flexWrap="wrap"
+        justifyContent="center"
+        spacing={3}
+      >
+        {tips.length ? (
+          tips.map((tip, index) => (
+            <Stack key={index} className="tip-card">
+              <div
+                className="tip-image"
+                style={{ backgroundImage: `url(${tip.image})` }}
+              ></div>
+              <Typography className="tip-title">{tip.title}</Typography>
+              <Typography className="tip-desc">{tip.desc}</Typography>
+              <Button className="tip-btn">Read More →</Button>
+            </Stack>
+          ))
+        ) : (
+          <Typography className="no-data">No Tips Available</Typography>
+        )}
+      </Stack>
+    </Stack>
+  </Container>
+</div>
     </div>
   );
 }

@@ -20,7 +20,7 @@ export default function Footer() {
         <Stack flexDirection="row" justifyContent="space-between">
           <Stack flexDirection="column" style={{ width: "340px" }}>
             <Box>
-              <img width="100px" src="/icons/logo-cosmetics.svg" alt="Logo" />
+              <img width="100px" src="/icons/icon1.jpeg" alt="Logo" />
             </Box>
             <Box className="foot-desc-txt">
               Premium skincare and cosmetics designed to enhance your natural
@@ -50,11 +50,11 @@ export default function Footer() {
               <Box className="foot-category-link">
                 <Box className="find-us">
                   <span>L.</span>
-                  <div>Downtown, Dubai</div>
+                  <div>Downtown, SEOUL</div>
                 </Box>
                 <Box className="find-us">
                   <span>P.</span>
-                  <div>+971 4 554 7777</div>
+                  <div>+821028977980</div>
                 </Box>
                 <Box className="find-us">
                   <span>E.</span>

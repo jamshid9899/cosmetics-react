@@ -106,40 +106,54 @@
 
 .products-page .products .list-category-section {
   width: 100%;
-  min-height: 600px;
   display: flex;
   flex-direction: row;
-  margin-top: 40px;
+  align-items: flex-start; /* chap panel yuqoridan boshlansin */
+  justify-content: flex-start;
+  margin-top: 30px; /* ozgina masofa tepaga */
+  gap: 30px;
 }
 
+/* chapdagi category bar */
 .products-page .products .list-category-section .product-category {
-  width: 40px;
-  height: 390px;
+  width: 60px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-top: 80px;
-  margin-left: 10px;
+  align-items: center;
+  justify-content: flex-start; /* tepaga joylashsin */
+  gap: 25px;
+  margin-top: 0; /* bu pastga tushirishni olib tashlaydi */
+  position: relative;
+  top: -10px; /* ozgina yuqoriga ko‘taradi */
 }
 
+/* tugmalar */
 .products-page .products .list-category-section .product-category button {
-  transform: rotate(90deg);
+  transform: rotate(-90deg);
   border-radius: 10px;
-  width: 80px;
+  width: 120px;
   height: 36px;
-  margin-top: 40px;
   white-space: nowrap;
+  background: #c4a77d;
+  color: #fff;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
 }
 
+/* category-main ichidagi joylashuv */
 .products-page .products .product-category .category-main {
   display: flex;
   flex-direction: column;
-  width: 36px;
-  height: 390px;
-  margin-top: 35px;
-  gap: 15px;
-  transform: rotate(180deg);
+  align-items: center;
+  justify-content: flex-start;
+  width: 60px;
+  gap: 85px;
+  transform: none;
 }
+
 
 /* PRODUCT WRAPPER */
 
@@ -320,96 +334,189 @@
 
 /* BRANDS LOGO */
 
-.products-page .products .brand-logo {
-  background-color: #0d1518;
+.brands-section {
   width: 100%;
-  height: auto;
-  margin-top: 60px;
-  padding: 40px 20px;
+  background: linear-gradient(180deg, #fdfdfd 0%, #faf9f7 100%);
+  padding: 80px 0;
+  text-align: center;
 }
 
-.products-page .products .brand-logo .brand-logo-frame {
+.brands-title {
+  font-family: "Playfair Display", serif;
+  font-size: 32px;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.brands-subtitle {
+  font-family: "Poppins", sans-serif;
+  color: #6f6f6f;
+  font-size: 15px;
+  margin-bottom: 40px;
+}
+
+/* --- Horizontal scroll --- */
+.brands-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 24px;
+  scroll-behavior: smooth;
+  padding: 10px 20px;
+  scrollbar-width: none;
+  justify-content: center; /* 🔹 markazga joylashtiradi */
+}
+
+
+.brands-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- Brand Cards --- */
+.brand-card {
+  flex: 0 0 180px;
+  min-width: 180px;
+  height: 180px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
-}
-
-.products-page .products .brand-logo .brand-logo-title {
-  font-family: "Poppins", sans-serif;
-  font-size: 30px;
-  color: tan;
-  text-align: center;
-  font-weight: bold;
-}
-.products-page .products .brand-logo .brand-logo-frame .card {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  gap: 30px;
-  justify-content: center;
-  padding: 20px 0;
-}
-
-.products-page .products .brand-logo .brands-card {
-  flex: 1 1 calc(25% - 15px);
-  max-width: 280px;
-  height: 350px;
-  background-color: #0d1518;
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.15);
-  display: flex;
-  align-items: center;
   justify-content: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
 }
 
-.products-page .products .brand-logo .brand-logo-frame .brands-card img {
-  max-height: 80%;
-  max-width: 90%;
-  border-radius: 12px;
+.brand-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.brand-card img {
+  max-width: 90px;
+  max-height: 50px;
   object-fit: contain;
+  margin-bottom: 10px;
 }
 
-.products-page .products .brand-logo .no-data {
+.brand-card p {
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  color: #333;
+}
+
+/* --- No data --- */
+.no-data {
   width: 100%;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-transform: capitalize;
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 30px;
-  line-height: 34px;
-  color: #e3c08d;
+  text-align: center;
+  color: #b8a382;
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+  padding: 40px 0;
 }
 
 /* ADDRESS */
 
-.products .address {
-  display: flex;
-  flex-direction: column;
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
-
-.products .address .address-area {
+/* BEAUTY TIPS SECTION */
+.products .beauty-tips-section {
+  width: 100%;
+  background: linear-gradient(to bottom, #fff, #f9f9f9);
+  padding: 80px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.products .address .address-area .title {
-  font-weight: bold;
-  margin-bottom: 10px;
-
-  font-family: "Poppins";
-  font-size: 35px;
+.products .beauty-tips-section .beauty-tips-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
 }
+
+.products .beauty-tips-section .beauty-tips-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #1b1b1b;
+}
+
+.products .beauty-tips-section .beauty-tips-subtitle {
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  color: #666;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+/* GRID */
+.products .beauty-tips-section .beauty-tips-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 40px;
+}
+
+/* CARD */
+.products .beauty-tips-section .tip-card {
+  width: 340px;
+  min-height: 380px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.products .beauty-tips-section .tip-card:hover {
+  transform: translateY(-6px);
+}
+
+.products .beauty-tips-section .tip-image {
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+}
+
+.products .beauty-tips-section .tip-title {
+  font-family: "Poppins";
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-top: 12px;
+}
+
+.products .beauty-tips-section .tip-desc {
+  font-family: "Poppins";
+  font-size: 14px;
+  color: #777;
+  margin: 10px 20px;
+  text-align: center;
+}
+
+.products .beauty-tips-section .tip-btn {
+  color: #b88b54;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.products .beauty-tips-section .no-data {
+  font-family: "Poppins";
+  font-size: 20px;
+  color: #999;
+  text-align: center;
+}
+
 
 /** ChosenProduct **/
 
