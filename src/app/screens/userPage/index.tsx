@@ -14,7 +14,7 @@ export default function UserPage() {
   const history = useHistory();
   const { authMember } = useGlobals();
 
-  if (!authMember) history.push("/");
+  if (!authMember) history.push("/")
   return (
     <div className={"user-page"}>
       <Container>
@@ -37,35 +37,23 @@ export default function UserPage() {
               >
                 <div className={"order-user-img"}>
                   <img
-                    alt=""
-                    src={
-                      authMember?.memberImage
-                        ? `${serverApi}/${authMember.memberImage}`
-                        : "/icons/default-user.svg"
-                    }
+                    src={authMember?.memberImage
+                      ? `${serverApi}/${authMember.memberImage}`
+                      : "/icons/default-user.svg"}
                     className={"order-user-avatar"}
                   />
                   <div className={"order-user-icon-box"}>
-                    <img
-                      alt=""
-                      src={
-                        authMember?.memberType === MemberType.ADMIN
-                          ? "/icons/restaurant.svg"
-                          : "/icons/user-badge.svg"
-                      }
-                    />
+                    <img src={
+                      authMember?.memberType === MemberType.ADMIN
+                      ? "/icons/restaurant.svg"
+                      : "/icons/user-badge.svg"} />
                   </div>
                 </div>
-                <span className={"order-user-name"}>
-                  {authMember?.memberNick}
-                </span>
-                <span className={"order-user-prof"}>
-                  {authMember?.memberType}
-                </span>
-                <span className={"order-user-prof"}>
-                  {authMember?.memberAddress
-                    ? authMember.memberAddress
-                    : "no memberAddress"}
+                <span className={"order-user-name"}>{authMember?.memberNick}</span>
+                <span className={"order-user-prof"}>{authMember?.memberType}</span>
+                <span className={"order-user-prof"}>{authMember?.memberAddress
+                  ? authMember.memberAddress 
+                  : "no memberAddress"}
                 </span>
               </Box>
               <Box className={"user-media-box"}>
@@ -74,11 +62,9 @@ export default function UserPage() {
                 <TelegramIcon />
                 <YouTubeIcon />
               </Box>
-              <p className={"user-desc"}>
-                {authMember?.memberDesc
-                  ? authMember.memberDesc
-                  : "no description"}
-              </p>
+              <p className={"user-desc"}>{authMember?.memberDesc
+                ? authMember.memberDesc
+                : "no description"}</p>
             </Box>
           </Stack>
         </Stack>

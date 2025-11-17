@@ -3,7 +3,7 @@ import { OrdersPageState } from "../../../lib/types/screen";
 
 const initialState: OrdersPageState = {
   pausedOrders: [],
-  proccessOrders: [],
+  processOrders: [],
   finishedOrders: [],
 };
 
@@ -15,7 +15,7 @@ const ordersPageSlice = createSlice({
       state.pausedOrders = action.payload;
     },
     setProccessOrders: (state, action) => {
-      state.proccessOrders = action.payload;
+      state.processOrders = action.payload;
     },
 
     setFinishedOrders: (state, action) => {

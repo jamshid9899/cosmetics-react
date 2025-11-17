@@ -6,9 +6,8 @@ import CardCover from "@mui/joy/CardCover";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import { CssVarsProvider } from "@mui/joy/styles";
-import CardOverflow from "@mui/joy/CardOverflow";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import DescriptionOutlinedicon from "@mui/icons-material/DescriptionOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
@@ -31,14 +30,30 @@ export default function PopularProducts() {
     <div className="popular-dishes-frame">
       <Container>
         <Stack className="popular-section">
-          <Box className="category-title">Popular Products</Box>
+          <Box className="category-title">✨ Popular Products</Box>
+          <Box className="category-subtitle">
+            Most loved skincare essentials by our customers
+          </Box>
+          
           <Stack className="cards-frame">
             {popularProducts.length !== 0 ? (
-              popularProducts.map((product: Product) => {
+              popularProducts.map((product: Product, index: number) => {
                 const imagePath = `${serverApi}/${product.productImages[0]}`;
                 return (
                   <CssVarsProvider key={product._id}>
-                    <Card className="card" sx={{ position: "relative" }}>
+                    <Card 
+                      className="card" 
+                      sx={{ 
+                        position: "relative",
+                        '--card-index': index 
+                      }}
+                    >
+                      {/* Popularity Badge */}
+                      <Box className="popularity-badge">
+                        <FavoriteIcon sx={{ fontSize: 16, mr: 0.5 }} />
+                        Popular
+                      </Box>
+
                       {/* Product Image */}
                       <Box
                         component="img"
@@ -53,14 +68,17 @@ export default function PopularProducts() {
                           top: 0,
                           left: 0,
                           zIndex: 0,
+                          transition: "transform 0.5s ease",
                         }}
+                        className="product-image"
                       />
+                      
                       {/* Gradient overlay */}
                       <CardCover
                         className="card-cover"
                         sx={{
                           background:
-                            "linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 300px)",
+                            "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 50%), linear-gradient(to top, rgba(184,138,68,0.3) 0%, rgba(0,0,0,0) 60%)",
                           position: "absolute",
                           top: 0,
                           left: 0,
@@ -69,40 +87,67 @@ export default function PopularProducts() {
                           zIndex: 1,
                         }}
                       />
+                      
                       <CardContent sx={{ justifyContent: "flex-end", zIndex: 2, position: "relative" }}>
-                        <Stack flexDirection="row" justifyContent="space-between">
-                          <Typography level="h2" fontSize="lg" textColor="#fff" mb={1}>
-                            {product.productName}
-                          </Typography>
-                          <Typography
+                        <Stack spacing={1.5}>
+                          <Typography 
+                            level="h2" 
+                            fontSize="22px" 
+                            textColor="#fff" 
+                            fontWeight="700"
+                            fontFamily="'Poppins', sans-serif"
                             sx={{
-                              fontWeight: "md",
-                              color: "neutral.300",
-                              alignItems: "center",
-                              display: "flex",
+                              textShadow: '0 2px 8px rgba(0,0,0,0.5)',
                             }}
                           >
-                            {product.productViews}
-                            <VisibilityIcon sx={{ fontSize: 25, marginLeft: "5px" }} />
+                            {product.productName}
+                          </Typography>
+                          
+                          <Stack direction="row" justifyContent="space-between" alignItems="center">
+                            <Typography
+                              fontSize="20px"
+                              fontWeight="700"
+                              sx={{
+                                color: "#f5d28b",
+                                textShadow: '0 2px 6px rgba(0,0,0,0.4)',
+                                fontFamily: "'Playfair Display', serif",
+                              }}
+                            >
+                              ${product.productPrice}
+                            </Typography>
+                            
+                            <Stack direction="row" spacing={0.5} alignItems="center">
+                              <Typography
+                                sx={{
+                                  fontWeight: "600",
+                                  color: "#fff",
+                                  fontSize: "15px",
+                                  fontFamily: "'Poppins', sans-serif",
+                                }}
+                              >
+                                {product.productViews}
+                              </Typography>
+                              <VisibilityIcon sx={{ fontSize: 20, color: "#f5d28b" }} />
+                            </Stack>
+                          </Stack>
+
+                          <Typography
+                            fontSize="14px"
+                            textColor="rgba(255,255,255,0.85)"
+                            sx={{
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              display: "-webkit-box",
+                              WebkitLineClamp: 2,
+                              WebkitBoxOrient: "vertical",
+                              lineHeight: 1.6,
+                              fontFamily: "'Poppins', sans-serif",
+                            }}
+                          >
+                            {product.productDesc}
                           </Typography>
                         </Stack>
                       </CardContent>
-                      <CardOverflow
-                        sx={{
-                          display: "flex",
-                          gap: 1.5,
-                          py: 1.5,
-                          px: "var(--Card-padding)",
-                          borderTop: "1px solid",
-                          height: "60px",
-                          zIndex: 2,
-                          position: "relative",
-                        }}
-                      >
-                        <Typography startDecorator={<DescriptionOutlinedicon />} textColor="neutral.300">
-                          {product.productDesc}
-                        </Typography>
-                      </CardOverflow>
                     </Card>
                   </CssVarsProvider>
                 );
@@ -116,4 +161,3 @@ export default function PopularProducts() {
     </div>
   );
 }
-

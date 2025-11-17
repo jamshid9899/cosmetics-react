@@ -80,9 +80,9 @@ export default function HomePage() {
     <div className={"homepage"}>
       <PopularDishes />
       <NewDishes />
-      <ActiveUsers />
       <Advertisement />
       <Statistics />
+      <ActiveUsers />
       <Events />
     </div>
   );

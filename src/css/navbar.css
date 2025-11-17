@@ -1,138 +1,457 @@
+/* ===================================
+   HOME NAVBAR - GRADIENT BACKGROUND
+   =================================== */
+
 .home-navbar {
-    width: 100%;
-    min-height: 750px;
-    display: flex;
-    background: url("/public/img/picture3.webp") no-repeat center/cover;
+  width: 100%;
+  min-height: 750px;
+  display: flex;
+  position: relative;
+  background: linear-gradient(135deg, #fdfbf7 0%, #f5e6d3 50%, #e8d4ba 100%);
+  overflow: hidden;
+}
+
+/* Decorative floating elements */
+.home-navbar::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(197, 152, 86, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 20s ease-in-out infinite;
+  z-index: 1;
+}
+
+.home-navbar::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(184, 138, 68, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 15s ease-in-out infinite reverse;
+  z-index: 1;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
 }
 
 .home-navbar .navbar-container {
-    margin-top: 50px;
+  margin-top: 50px;
+  position: relative;
+  z-index: 10;
 }
 
 .home-navbar .menu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 0 40px;
+  border-radius: 60px;
+  box-shadow: 0 8px 32px rgba(184, 138, 68, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
 }
+
+.home-navbar .menu:hover {
+  box-shadow: 0 12px 40px rgba(184, 138, 68, 0.25);
+  transform: translateY(-2px);
+}
+
+/* ===================================
+   BRAND LOGO - CIRCULAR
+   =================================== */
 
 .brand-logo {
-    width: 130px;
-    height: auto;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #b88a44;
+  box-shadow: 0 4px 15px rgba(184, 138, 68, 0.3);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  cursor: pointer;
 }
 
+.brand-logo:hover {
+  transform: rotate(360deg) scale(1.1);
+  box-shadow: 0 6px 25px rgba(184, 138, 68, 0.5);
+  border-color: #c59856;
+}
+
+/* ===================================
+   NAVIGATION LINKS
+   =================================== */
+
 .links {
-    display: flex;
-    gap: 30px;
-    align-items: center;
+  display: flex;
+  gap: 30px;
+  align-items: center;
 }
 
 .nav-link {
-    color: #fff;
-    text-decoration: none;
-    font-family: "Poppins", sans-serif;
-    font-size: 16px;
-    position: relative;
+  color: #4b3b28;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  position: relative;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
 }
 
 .nav-link::after {
-    content: "";
-    display: block;
-    height: 2px;
-    width: 0%;
-    background: #d7b686;
-    transition: width 0.3s;
-    position: absolute;
-    bottom: -4px;
-    left: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, #b88a44, #c59856);
+  transition: width 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  box-shadow: 0 2px 8px rgba(184, 138, 68, 0.3);
+}
+
+.nav-link:hover {
+  color: #b88a44;
+  transform: translateY(-2px);
 }
 
 .nav-link:hover::after {
-    width: 100%;
+  width: 100%;
 }
+
+/* ===================================
+   LOGIN BUTTON - LARGER
+   =================================== */
 
 .login-button {
-    background: #3776cc;
-    color: #f8f8ff;
+  background: linear-gradient(135deg, #b88a44 0%, #c59856 100%);
+  color: #f8f8ff;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(184, 138, 68, 0.3);
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
 }
+
+.login-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.5s, height 0.5s;
+}
+
+.login-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.login-button:hover {
+  background: linear-gradient(135deg, #c59856 0%, #d4a76a 100%);
+  box-shadow: 0 6px 20px rgba(184, 138, 68, 0.5);
+  transform: translateY(-2px);
+}
+
+.login-button:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 10px rgba(184, 138, 68, 0.3);
+}
+
+/* ===================================
+   USER AVATAR
+   =================================== */
 
 .user-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid #b88a44;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(184, 138, 68, 0.25);
 }
 
-/* Banner text */
-/* Banner text */
+.user-avatar:hover {
+  transform: scale(1.1);
+  border-color: #c59856;
+  box-shadow: 0 6px 20px rgba(184, 138, 68, 0.4);
+}
+
+.user-avatar:active {
+  transform: scale(1.05);
+}
+
+/* ===================================
+   BANNER TEXT - LEFT ALIGNED
+   =================================== */
+
 .banner-text {
   position: relative;
   margin-top: 150px;
   display: flex;
   flex-direction: column;
   gap: 18px;
-  align-items: flex-start; /* chapga hizaladi */
-  padding-left: 90px; /* chapga yaqinlashtiradi */
-  max-width: 550px; /* kenglik cheklab, text fokusni beradi */
-  color: #fff;
+  align-items: flex-start;
+  padding-left: 90px;
+  max-width: 550px;
   z-index: 2;
+  left: 4px;
+  animation: fadeInLeft 1s ease-out;
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .head-main-txt {
   font-family: "Playfair Display", serif;
-  font-size: 60px; /* biroz kattaroq, brend hisi uchun */
+  font-size: 60px;
   font-weight: 600;
   line-height: 1.2;
+  background: linear-gradient(135deg, #b88a44 0%, #c59856 50%, #b88a44 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s ease-in-out infinite, fadeInLeft 1s ease-out 0.2s both;
+  letter-spacing: 1px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
 }
 
 .wel-txt {
   font-family: "Poppins", sans-serif;
   font-size: 26px;
   font-weight: 400;
-  color: #d7b686;
+  color: #6b5744;
+  letter-spacing: 0.8px;
+  animation: fadeInLeft 1s ease-out 0.4s both;
+  line-height: 1.6;
 }
 
 .service-txt {
   font-family: "Poppins", sans-serif;
   font-size: 20px;
-  color: #d5d5d5;
+  color: #b88a44;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  animation: fadeInLeft 1s ease-out 0.6s both;
+  display: inline-block;
+  padding: 6px 20px;
+  background: rgba(184, 138, 68, 0.1);
+  border-radius: 25px;
+  border: 1px solid rgba(184, 138, 68, 0.3);
+  width: fit-content;
+  font-weight: 500;
 }
+
+/* ===================================
+   SIGNUP BUTTON - ULTRA PREMIUM STYLE
+   =================================== */
 
 .signup-button {
   margin-top: 50px;
-  padding: 26px 90px;            /* 👈 juda katta bo‘ldi */
-  font-size: 26px;               /* 👈 matn katta */
-  font-weight: 700;
+  padding: 24px 65px;
+  font-size: 22px;
+  font-weight: 800;
   font-family: "Poppins", sans-serif;
-  border: none;
+  border: 3px solid rgba(255, 255, 255, 0.6);
   border-radius: 50px;
-  background: linear-gradient(90deg, #dcb877, rgb(184, 138, 68));
+  background: linear-gradient(135deg, #f4d03f 0%, #d4a76a 50%, #b88a44 100%);
   color: #fff;
   cursor: pointer;
-  box-shadow: 0 12px 30px rgba(184, 138, 68, 0.45);
-  transition: all 0.35s ease;
+  box-shadow: 0 15px 50px rgba(244, 208, 63, 0.8),
+              0 5px 25px rgba(184, 138, 68, 0.6),
+              inset 0 3px 0 rgba(255, 255, 255, 0.6),
+              inset 0 -3px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  letter-spacing: 2px;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  min-width: 320px;              
-  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: fadeInLeft 1s ease-out 0.8s both, glowPulse 2.5s ease-in-out infinite;
+  min-width: 280px;
+  z-index: 100;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Yangi glow pulse animatsiyasi - yanada kuchli */
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 15px 50px rgba(244, 208, 63, 0.8),
+                0 5px 25px rgba(184, 138, 68, 0.6),
+                inset 0 3px 0 rgba(255, 255, 255, 0.6),
+                inset 0 -3px 0 rgba(0, 0, 0, 0.1);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 20px 60px rgba(244, 208, 63, 1),
+                0 10px 40px rgba(184, 138, 68, 0.9),
+                0 0 30px rgba(255, 215, 0, 0.8),
+                inset 0 3px 0 rgba(255, 255, 255, 0.7),
+                inset 0 -3px 0 rgba(0, 0, 0, 0.15);
+    transform: scale(1.03);
+  }
+}
+
+/* Sparkle effect */
+.signup-button::before {
+  content: '✨';
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  font-size: 26px;
+  opacity: 0;
+  transition: all 0.5s ease;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.8) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.2) rotate(180deg);
+  }
+}
+
+/* Ripple effect */
+.signup-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: translate(-50%, -50%);
+  transition: width 0.7s ease-out, height 0.7s ease-out;
+}
+
+.signup-button:hover::after {
+  width: 500px;
+  height: 500px;
+}
+
+.signup-button:hover::before {
+  opacity: 1;
+  left: 18px;
+  animation: none;
 }
 
 .signup-button:hover {
-  background: linear-gradient(90deg, #54b844, #dcb877);
-  transform: scale(1.05) translateY(-4px);
-  box-shadow: 0 16px 36px rgba(184, 138, 68, 0.55);
+  background: linear-gradient(135deg, #ffd700 0%, #f4d03f 50%, #d4a76a 100%);
+  box-shadow: 0 25px 70px rgba(255, 215, 0, 1),
+              0 15px 50px rgba(244, 208, 63, 0.9),
+              0 0 50px rgba(255, 215, 0, 0.9),
+              inset 0 3px 0 rgba(255, 255, 255, 0.8),
+              inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+  transform: translateY(-8px) scale(1.08);
+  border-color: rgba(255, 255, 255, 0.9);
+  animation: none;
+  letter-spacing: 2.5px;
 }
+
+.signup-button:active {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 12px 40px rgba(244, 208, 63, 0.8),
+              0 5px 20px rgba(184, 138, 68, 0.7),
+              inset 0 3px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* ===================================
+   OTHER NAVBAR - GRADIENT BACKGROUND (NO IMAGE)
+   =================================== */
 
 .other-navbar {
   width: 100%;
   height: 400px;
   display: flex;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("/public/img/picture3.webp") no-repeat center/cover;
+  position: relative;
+  background: linear-gradient(135deg, #3d2817 0%, #5a3825 50%, #4a2c1a 100%);
+  overflow: hidden;
+}
+
+.other-navbar::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -8%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(215, 182, 134, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 25s ease-in-out infinite;
+  z-index: 1;
+}
+
+.other-navbar::after {
+  content: '';
+  position: absolute;
+  bottom: -35%;
+  left: -10%;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(184, 138, 68, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 20s ease-in-out infinite reverse;
+  z-index: 1;
 }
 
 .other-navbar .navbar-container {
   margin-top: 55px;
+  position: relative;
+  z-index: 10;
 }
 
 .other-navbar .navbar-container .menu {
@@ -141,11 +460,31 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  padding: 0 35px;
+  border-radius: 45px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.other-navbar .navbar-container .menu:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
 }
 
 .other-navbar .navbar-container .menu .brand-logo {
-  width: 125px;
-  height: 30px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.5);
+}
+
+.other-navbar .navbar-container .menu .brand-logo:hover {
+  border-color: #dcb877;
 }
 
 .other-navbar .navbar-container .menu .links {
@@ -157,17 +496,26 @@
 }
 
 .other-navbar .navbar-container .menu .links .login-button {
-  background: #3776cc;
+  background: linear-gradient(135deg, #b88a44 0%, #c59856 100%);
   color: #f8f8ff;
+  padding: 11px 30px;
+  font-size: 15px;
 }
 
 .other-navbar .navbar-container .menu .user-avatar {
   width: 50px;
   height: 50px;
-  border-radius: 24px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
 }
 
-/* linklar umumiy ko‘rinishi */
+.other-navbar .navbar-container .menu .user-avatar:hover {
+  transform: scale(1.1);
+  border-color: #dcb877;
+  box-shadow: 0 6px 20px rgba(215, 182, 134, 0.4);
+}
+
 .other-navbar a {
   text-decoration: none;
   color: #f8f8ff;
@@ -175,9 +523,10 @@
   font-size: 16px;
   position: relative;
   transition: color 0.3s ease;
+  font-weight: 500;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* hoverda chiqadigan chiziq */
 .other-navbar .hover-line a::after {
   content: "";
   position: absolute;
@@ -185,18 +534,22 @@
   left: 0;
   width: 0%;
   height: 2px;
-  background: #d7b686;
+  background: linear-gradient(90deg, #dcb877, #e8c994);
   transition: width 0.3s ease-in-out;
+  box-shadow: 0 2px 8px rgba(215, 182, 134, 0.4);
 }
 
-/* hover paytida underline ochiladi */
+.other-navbar .hover-line a:hover {
+  color: #dcb877;
+}
+
 .other-navbar .hover-line a:hover::after {
   width: 100%;
 }
 
-/* active (activeClassName="underline") holatda chiziq doim ko‘rinadi */
 .other-navbar .underline {
   position: relative;
+  color: #dcb877;
 }
 
 .other-navbar .underline::after {
@@ -206,11 +559,41 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background: #d7b686;
+  background: linear-gradient(90deg, #dcb877, #e8c994);
+  box-shadow: 0 2px 8px rgba(215, 182, 134, 0.4);
 }
 
+/* ===================================
+   BASKET - ELEGANT DESIGN + HOME NAVBAR FIX
+   =================================== */
 
-/* BASKET */
+/* Home Navbar uchun basket hover-line */
+.home-navbar .hover-line {
+  position: relative;
+  z-index: 999;
+}
+
+/* Basket icon styling for Home Navbar */
+.home-navbar .hover-line img[src="/icons/shopping-cart.svg"] {
+  filter: brightness(0) saturate(100%) invert(29%) sepia(28%) saturate(1076%) hue-rotate(359deg) brightness(93%) contrast(87%);
+  transition: all 0.3s ease;
+  width: 28px;
+  height: 28px;
+}
+
+.home-navbar .hover-line:hover img[src="/icons/shopping-cart.svg"] {
+  filter: brightness(0) saturate(100%) invert(54%) sepia(33%) saturate(724%) hue-rotate(356deg) brightness(93%) contrast(86%);
+  transform: scale(1.15);
+}
+
+/* Basket badge for Home Navbar */
+.home-navbar .MuiBadge-badge {
+  background: linear-gradient(135deg, #b88a44 0%, #c59856 100%);
+  color: white;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(184, 138, 68, 0.4);
+  border: 2px solid white;
+}
 
 .basket-frame {
   position: relative;
@@ -219,8 +602,22 @@
   height: auto;
   display: flex;
   flex-direction: column;
-  background: #f8f8ff;
-  border-radius: 16px;
+  background: linear-gradient(135deg, #ffffff 0%, #fdfbf7 100%);
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(184, 138, 68, 0.15);
+  border: 1px solid rgba(215, 182, 134, 0.2);
+  animation: slideInDown 0.4s ease-out;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .basket-frame .all-check-box {
@@ -230,10 +627,16 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  background: #d7b586;
+  background: linear-gradient(135deg, #d7b586, #dcb877);
   border-width: 1px 0px;
   border-style: solid;
-  border-color: #343434;
+  border-color: rgba(52, 52, 52, 0.1);
+  border-radius: 10px 10px 0 0;
+  transition: all 0.3s ease;
+}
+
+.basket-frame .all-check-box:hover {
+  background: linear-gradient(135deg, #dcb877, #e8c994);
 }
 
 .basket-frame .basket-info-box {
@@ -244,13 +647,33 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding: 12px;
+  background: #fff;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.basket-info-box:hover {
+  background: #fdfbf7;
+  border-color: rgba(215, 182, 134, 0.3);
+  transform: translateX(5px);
+  box-shadow: 0 4px 15px rgba(184, 138, 68, 0.1);
 }
 
 .basket-info-box .product-img {
   width: 60px;
   height: 60px;
-  filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25));
-  border-radius: 29px;
+  filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.15));
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(215, 182, 134, 0.2);
+}
+
+.basket-info-box:hover .product-img {
+  transform: scale(1.05) rotate(2deg);
+  border-color: #dcb877;
 }
 
 .basket-info-box .product-name {
@@ -258,24 +681,34 @@
   width: 185px;
   font-family: "Poppins";
   font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 30px;
-  color: #000000;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  color: #2c2c2c;
+  transition: color 0.3s ease;
+}
+
+.basket-info-box:hover .product-name {
+  color: #b88a44;
 }
 
 .basket-info-box .product-price {
   width: 80px;
   font-family: "Poppins";
   font-style: normal;
-  font-weight: 600;
-  font-size: 15px;
+  font-weight: 700;
+  font-size: 16px;
   line-height: 22px;
-  color: #ae0000;
+  color: #b88a44;
+  transition: all 0.3s ease;
 }
 
-.basket-info-box
-  .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+.basket-info-box:hover .product-price {
+  color: #dcb877;
+  transform: scale(1.05);
+}
+
+.basket-info-box .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
   padding: 6.5px 14px;
 }
 
@@ -288,6 +721,18 @@
   top: 33%;
   right: 2%;
   cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0.6;
+}
+
+.basket-frame .cancel-btn:hover {
+  opacity: 1;
+  transform: scale(1.2) rotate(90deg);
+  filter: drop-shadow(0 2px 6px rgba(184, 138, 68, 0.4));
+}
+
+.basket-frame .cancel-btn:active {
+  transform: scale(1.1) rotate(90deg);
 }
 
 .basket-frame .basket-order {
@@ -298,7 +743,9 @@
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  border-top: 1px solid rgba(0, 0, 0, 0.5);
+  border-top: 2px solid rgba(215, 182, 134, 0.3);
+  background: linear-gradient(135deg, #fdfbf7, #ffffff);
+  border-radius: 0 0 20px 20px;
 }
 
 .basket-order .price {
@@ -306,10 +753,10 @@
   display: flex;
   font-family: "Poppins";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   font-size: 20px;
   line-height: 30px;
-  color: #000000;
+  color: #2c2c2c;
 }
 
 .basket-frame .orders-wrapper {
@@ -320,19 +767,26 @@
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
+  padding: 8px;
 }
 
 .basket-frame .orders-wrapper::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 .basket-frame .orders-wrapper::-webkit-scrollbar-thumb {
-  background-color: #888;
-  border-radius: 5px;
+  background: linear-gradient(135deg, #d7b586, #dcb877);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+.basket-frame .orders-wrapper::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #dcb877, #e8c994);
 }
 
 .basket-frame .orders-wrapper::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f5f5f5;
+  border-radius: 10px;
 }
 
 .basket-frame .orders-main-wrapper {
@@ -345,4 +799,138 @@
   flex-direction: column;
 }
 
+/* Basket buttonlar uchun styling */
+.basket-info-box .col-2 {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
 
+.basket-info-box .col-2 button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #b88a44;
+  background: white;
+  color: #b88a44;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.basket-info-box .col-2 button:hover {
+  background: linear-gradient(135deg, #b88a44, #c59856);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(184, 138, 68, 0.4);
+}
+
+.basket-info-box .col-2 button:active {
+  transform: scale(0.95);
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+
+@media (max-width: 1200px) {
+  .head-main-txt {
+    font-size: 52px;
+  }
+  
+  .wel-txt {
+    font-size: 22px;
+  }
+  
+  .banner-text {
+    padding-left: 60px;
+  }
+  
+  .brand-logo {
+    width: 65px;
+    height: 65px;
+  }
+  
+  .signup-button {
+    padding: 20px 55px;
+    font-size: 20px;
+    min-width: 260px;
+  }
+}
+
+@media (max-width: 992px) {
+  .home-navbar {
+    min-height: 650px;
+  }
+  
+  .head-main-txt {
+    font-size: 44px;
+  }
+  
+  .wel-txt {
+    font-size: 20px;
+  }
+  
+  .service-txt {
+    font-size: 18px;
+  }
+  
+  .signup-button {
+    padding: 18px 45px;
+    font-size: 18px;
+    min-width: 240px;
+  }
+  
+  .banner-text {
+    padding-left: 40px;
+    margin-top: 100px;
+  }
+  
+  .brand-logo {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-navbar .menu {
+    flex-direction: column;
+    height: auto;
+    padding: 20px;
+    gap: 15px;
+  }
+  
+  .links {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .banner-text {
+    padding-left: 20px;
+    max-width: 90%;
+  }
+  
+  .head-main-txt {
+    font-size: 36px;
+  }
+  
+  .signup-button {
+    padding: 16px 40px;
+    font-size: 16px;
+    min-width: 220px;
+  }
+  
+  .basket-frame {
+    width: 95%;
+    max-width: 400px;
+  }
+  
+  .brand-logo {
+    width: 55px;
+    height: 55px;
+  }
+}

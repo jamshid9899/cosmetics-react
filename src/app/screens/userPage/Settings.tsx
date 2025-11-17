@@ -7,18 +7,15 @@ import { MemberUpdateInput } from "../../../lib/types/member";
 import { T } from "../../../lib/types/common";
 import { Messages, serverApi } from "../../../lib/config";
 import MemberService from "../../services/MemberService";
-import {
-  sweetErrorHandling,
-  sweetTopSmallSuccessAlert,
-} from "../../../lib/sweetAlert";
+import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
 
 export function Settings() {
-  const { authMember, setAuthMember } = useGlobals();
+  const { authMember, setAuthMember} = useGlobals();
   const [memberImage, setMemberImage] = useState<string>(
-    authMember?.memberImage
-      ? `${serverApi}/${authMember.memberImage}`
-      : "/icons/default-user.svg"
-  );
+    authMember?.memberImage  
+     ? `${serverApi}/${authMember.memberImage}`
+     : "/icons/default-user.svg"
+  )
   const [memberUpdateInput, setMemberUpdateInput] = useState<MemberUpdateInput>(
     {
       memberNick: authMember?.memberNick,
@@ -30,25 +27,25 @@ export function Settings() {
   );
 
   /**HANDLERS */
-  const memberNickHandler = (e: T) => {
+  const memberNickHandler = (e: T) =>{
     memberUpdateInput.memberNick = e.target.value;
-    setMemberUpdateInput({ ...memberUpdateInput });
-  };
+    setMemberUpdateInput({ ...memberUpdateInput});
+  }
 
-  const memberPhoneHandler = (e: T) => {
+   const memberPhoneHandler = (e: T) =>{
     memberUpdateInput.memberPhone = e.target.value;
-    setMemberUpdateInput({ ...memberUpdateInput });
-  };
+    setMemberUpdateInput({ ...memberUpdateInput});
+  }
 
-  const memberAddressHandler = (e: T) => {
+   const memberAddressHandler = (e: T) =>{
     memberUpdateInput.memberAddress = e.target.value;
-    setMemberUpdateInput({ ...memberUpdateInput });
-  };
+    setMemberUpdateInput({ ...memberUpdateInput});
+  }
 
-  const memberDescriptionHandler = (e: T) => {
+   const memberDescriptionHandler = (e: T) =>{
     memberUpdateInput.memberDesc = e.target.value;
-    setMemberUpdateInput({ ...memberUpdateInput });
-  };
+    setMemberUpdateInput({ ...memberUpdateInput});
+  }
 
   const handleSubmitButton = async () => {
     try {
@@ -57,7 +54,7 @@ export function Settings() {
         memberUpdateInput.memberNick === "" ||
         memberUpdateInput.memberPhone === "" ||
         memberUpdateInput.memberAddress === "" ||
-        memberUpdateInput.memberDesc === ""
+           memberUpdateInput.memberDesc === ""   
       ) {
         throw new Error(Messages.error3);
       }
@@ -72,22 +69,22 @@ export function Settings() {
     }
   };
 
-  const handleImageViewer = (e: T) => {
-    const file = e.target.files[0];
-    console.log("file:", file);
-    const fileType = file.type,
-      validateImageTypes = ["image/jpg", "image/jpeg", "image/png"];
-
-    if (!validateImageTypes.includes(fileType)) {
+    const handleImageViewer = (e: T) => {
+      const file = e.target.files[0];
+      console.log("file:", file);
+      const fileType = file.type,
+        validateImageTypes = ["image/jpg", "image/jpeg", "image/png"];
+      
+     if (!validateImageTypes.includes(fileType)) {
       sweetErrorHandling(Messages.error5).then();
-    } else {
+     } else {
       if (file) {
         memberUpdateInput.memberImage = file;
         setMemberUpdateInput({ ...memberUpdateInput });
         setMemberImage(URL.createObjectURL(file));
       }
+     }
     }
-  };
   return (
     <Box className={"settings"}>
       <Box className={"member-media-frame"}>
@@ -122,7 +119,7 @@ export function Settings() {
           <input
             className={"spec-input mb-phone"}
             type="text"
-            placeholder={authMember?.memberPhone ?? "no phone"}
+            placeholder={authMember?.memberPhone?? "no phone"}
             value={memberUpdateInput.memberPhone}
             name="memberPhone"
             onChange={memberPhoneHandler}
@@ -133,10 +130,9 @@ export function Settings() {
           <input
             className={"spec-input  mb-address"}
             type="text"
-            placeholder={
-              authMember?.memberAddress
-                ? authMember.memberAddress
-                : "no address"
+            placeholder={authMember?.memberAddress
+              ? authMember.memberAddress
+              : "no address"
             }
             value={memberUpdateInput.memberAddress}
             name="memberAddress"
@@ -149,9 +145,7 @@ export function Settings() {
           <label className={"spec-label"}>Description</label>
           <textarea
             className={"spec-textarea mb-description"}
-            placeholder={
-              authMember?.memberDesc ? authMember.memberDesc : "no description"
-            }
+            placeholder={authMember?.memberDesc? authMember.memberDesc : "no description"}
             value={memberUpdateInput.memberDesc}
             name="memberDesc"
             onChange={memberDescriptionHandler}
@@ -159,9 +153,7 @@ export function Settings() {
         </div>
       </Box>
       <Box className={"save-box"}>
-        <Button variant={"contained"} onClick={handleSubmitButton}>
-          Save
-        </Button>
+        <Button variant={"contained"} onClick={handleSubmitButton}>Save</Button>
       </Box>
     </Box>
   );

@@ -28,7 +28,6 @@ interface HomeNavbarProps {
   handleCloseLogout: () => void;
   handleLogoutRequest: () => void;
 }
-
 export default function HomeNavbar(props: HomeNavbarProps) {
   const {
     cartItems,
@@ -52,7 +51,7 @@ export default function HomeNavbar(props: HomeNavbarProps) {
         <Stack direction="row" justifyContent="space-between" alignItems="center" className="menu">
           {/* LOGO */}
           <NavLink to="/">
-            <img className="brand-logo" src="/img/default.jpeg" alt="Brand Logo" />
+            <img className="brand-logo" src="/img/default4.jpeg" alt="Brand Logo" />
           </NavLink>
 
           {/* LINKS */}
@@ -68,14 +67,16 @@ export default function HomeNavbar(props: HomeNavbarProps) {
               </>
             )}
 
-            {/* BASKET */}
-            <Basket
-              cartItems={cartItems}
-              onAdd={onAdd}
-              onRemove={onRemove}
-              onDelete={onDelete}
-              onDeleteAll={onDeleteAll}
-            />
+            {/* BASKET - hover-line class qo'shildi */}
+            <Box className="hover-line">
+              <Basket
+                cartItems={cartItems}
+                onAdd={onAdd}
+                onRemove={onRemove}
+                onDelete={onDelete}
+                onDeleteAll={onDeleteAll}
+              />
+            </Box>
 
             {!authMember ? (
               <Button variant="contained" className="login-button" onClick={() => setLoginOpen(true)}>
@@ -93,45 +94,46 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                 onClick={handleLogoutClick}
               />
             )}
-
-            {/* LOGOUT MENU */}
-            <Menu
-              id="account-menu"
-              open={Boolean(anchorEl)}
-              onClose={handleCloseLogout}
-              onClick={handleCloseLogout}
-              PaperProps={{
-                elevation: 0,
-                sx: {
-                  overflow: "visible",
-                  filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-                  mt: 1.5,
-                  "&:before": {
-                    content: '""',
-                    display: "block",
-                    position: "absolute",
-                    top: 0,
-                    right: 14,
-                    width: 10,
-                    height: 10,
-                    bgcolor: "background.paper",
-                    transform: "translateY(-50%) rotate(45deg)",
-                    zIndex: 0,
-                  },
-                },
-              }}
-              transformOrigin={{ horizontal: "right", vertical: "top" }}
-              anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-            >
-              <MenuItem onClick={handleLogoutRequest}>
-                <ListItemIcon>
-                  <Logout fontSize="small" sx={{ color: "#b88a44" }} />
-                </ListItemIcon>
-                Logout
-              </MenuItem>
-            </Menu>
           </Stack>
         </Stack>
+
+        {/* LOGOUT MENU - Stack tashqarisida */}
+        <Menu
+          anchorEl={anchorEl}
+          id="account-menu"
+          open={Boolean(anchorEl)}
+          onClose={handleCloseLogout}
+          onClick={handleCloseLogout}
+          PaperProps={{
+            elevation: 0,
+            sx: {
+              overflow: "visible",
+              filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+              mt: 1.5,
+              "&:before": {
+                content: '""',
+                display: "block",
+                position: "absolute",
+                top: 0,
+                right: 14,
+                width: 10,
+                height: 10,
+                bgcolor: "background.paper",
+                transform: "translateY(-50%) rotate(45deg)",
+                zIndex: 0,
+              },
+            },
+          }}
+          transformOrigin={{ horizontal: "right", vertical: "top" }}
+          anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+        >
+          <MenuItem onClick={handleLogoutRequest}>
+            <ListItemIcon>
+              <Logout fontSize="small" sx={{ color: "#b88a44" }} />
+            </ListItemIcon>
+            Logout
+          </MenuItem>
+        </Menu>
 
         {/* HERO BANNER */}
         <Stack className="banner-text" spacing={2}>
@@ -152,9 +154,3 @@ export default function HomeNavbar(props: HomeNavbarProps) {
     </div>
   );
 }
-
-
-
-
-
-
