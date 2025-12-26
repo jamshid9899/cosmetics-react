@@ -10,6 +10,7 @@ import theme from "./app/MaterialTheme";
 import "./css/index.css";
 import ContextProvider from "./app/context/ContextProvider";
 import App from "./app/App";
+import { SocketProvider } from "./app/context/SocketContext";
 
 const container = document.getElementById("root")!; //RealDom
 const root = createRoot(container);
@@ -18,12 +19,14 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ContextProvider>
+        <SocketProvider>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Router>
             <App />
           </Router>
         </ThemeProvider>
+        </SocketProvider>
       </ContextProvider>
     </Provider>
   </React.StrictMode>
