@@ -1,0 +1,162 @@
+import React from "react";
+import TabPanel from "@mui/lab/TabPanel";
+import { Box, Stack } from "@mui/material";
+import Button from "@mui/material/Button";
+import moment from "moment";
+
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrieveProccessOrders } from "./selector";
+import { Messages, serverApi } from "../../../lib/config";
+import { Order, OrderItem, OrderUpdateInput } from "../../../lib/types/order";
+import { Product } from "../../../lib/types/product";
+import { useGlobals } from "../../hooks/useGlobals";
+import { OrderStatus } from "../../../lib/enums/order.enum";
+import OrderService from "../../services/OrderService";
+import { sweetErrorHandling } from "../../../lib/sweetAlert";
+
+/** REDUX SELECTOR **/
+const processOrdersRetriever = createSelector(
+  retrieveProccessOrders,
+  (processOrders) => ({ processOrders })
+);
+
+interface ProcessOrdersProps {
+  setValue: (input: string) => void;
+}
+
+export default function ProcessOrders(props: ProcessOrdersProps) {
+  const { setValue } = props;
+  const { authMember, setOrderBuilder } = useGlobals();
+  const { processOrders } = useSelector(processOrdersRetriever);
+
+  /** =======================
+   *   FINISH + DELETE HANDLER
+   *  ======================= */
+  const finishOrderHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    try {
+      if (!authMember) throw new Error(Messages.error2);
+
+      const orderId = (e.target as HTMLButtonElement).value;
+
+      const confirmation = window.confirm("Have you received your order?");
+      if (!confirmation) return;
+
+      const orderService = new OrderService();
+
+      /** 1) ORDER → FINISH */
+      await orderService.updateOrder({
+        orderId,
+        orderStatus: OrderStatus.FINISH,
+      });
+
+      // Show Finished tab
+      setValue("3");
+      setOrderBuilder(new Date());
+
+      /** 2) 3 SECOND LATER → DELETE */
+      setTimeout(async () => {
+        await orderService.updateOrder({
+          orderId,
+          orderStatus: OrderStatus.DELETE,
+        });
+
+        setOrderBuilder(new Date()); // refresh redux
+      }, 3000);
+
+    } catch (err) {
+      console.log(err);
+      sweetErrorHandling(err).then();
+    }
+  };
+
+  return (
+    <TabPanel value={"2"}>
+      <Stack>
+        {processOrders?.map((order: Order) => {
+          return (
+            <Box key={order._id} className={"order-main-box"}>
+              <Box className="order-box-scroll">
+                {order?.orderItems?.map((item: OrderItem) => {
+                  const product: Product = order.productData.filter(
+                    (ele: Product) => item.productId === ele._id
+                  )[0];
+                  const imagePath = `${serverApi}/${product.productImages[0]}`;
+
+                  return (
+                    <Box key={item._id} className={"order-name-price"}>
+                      <img src={imagePath} className={"order-dish-img"} />
+
+                      <Stack
+                        sx={{
+                          width: 650,
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <p className={"title-dish"}>{product.productName}</p>
+
+                        <Box className={"price-box"}>
+                          <p>{item.itemPrice}</p>
+                          <img src={"/icons/close.svg"} />
+                          <p>{item.itemQuantity}</p>
+                          <img src={"/icons/pause.svg"} />
+                          <p style={{ marginLeft: "15px" }}>
+                            ${item.itemQuantity * item.itemPrice}
+                          </p>
+                        </Box>
+                      </Stack>
+                    </Box>
+                  );
+                })}
+              </Box>
+
+              <Box className={"total-price-box"}>
+                <Box className={"box-total"}>
+                  <p>Product price</p>
+                  <p>${order.orderTotal - order.orderDelivery}</p>
+                  <img src={"/icons/plus.svg"} style={{ marginLeft: "20px" }} />
+
+                  <p>delivery cost</p>
+                  <p>${order.orderDelivery}</p>
+
+                  <img
+                    src={"/icons/pause.svg"}
+                    style={{ marginLeft: "20px" }}
+                  />
+
+                  <p>Total</p>
+                  <p>${order.orderTotal}</p>
+                </Box>
+
+                <p className={"data-compl"}>
+                  {moment().format("YY-MM-DD HH:mm")}
+                </p>
+
+                {/* FINISH BUTTON */}
+                <Button
+                  value={order._id}
+                  variant="contained"
+                  className={"verify-button"}
+                  onClick={finishOrderHandler}
+                >
+                  Verify to Fulfill
+                </Button>
+              </Box>
+            </Box>
+          );
+        })}
+
+        {(!processOrders || processOrders.length === 0) && (
+          <Box display={"flex"} flexDirection={"row"} justifyContent={"center"}>
+            <img
+              src="/icons/noimage-list.svg"
+              style={{ width: 300, height: 300 }}
+            />
+          </Box>
+        )}
+      </Stack>
+    </TabPanel>
+  );
+}
